@@ -3,6 +3,7 @@
 	writeback
 	Asignee: Yaroslav
 */
+#pragma once
 
 struct interstate{
 	uint8_t opcode;

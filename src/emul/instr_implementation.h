@@ -2,6 +2,7 @@
 	Implementation of _fetch, _execute and _writeback of
 	every possible instruction
 */
+#pragma once
 
 #include "interstate.h"
 #include "memory_unit.h"

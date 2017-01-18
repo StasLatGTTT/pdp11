@@ -1,6 +1,7 @@
 /*
 	Store defines to make work with emulator easier
 */
+#pragma once
 
 #define R0 0x00
 #define R1 0x01

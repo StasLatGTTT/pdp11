@@ -1,6 +1,7 @@
 /*
 	Class o save data about every decoded instruction
 */
+#pragma once
 
 #include "interstate.h"
 #include "instruction_entry.h"

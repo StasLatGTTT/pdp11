@@ -1,3 +1,9 @@
+/*
+	Single entry for decoded instructions array
+*/
+
+#pragma once
+
 #include "memory_unit.h"
 
 struct instruction_entry{
