@@ -9,6 +9,7 @@
 class proc{
 	//64-bit
 	int8_t* memory;
+	interstate* state;
 
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
@@ -18,4 +19,10 @@ class proc{
 
 	//8-bit
 	int8_t statword;
+
+public:
+	proc();
+	~proc();
+
+	step();
 }
