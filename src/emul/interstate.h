@@ -11,4 +11,4 @@ struct interstate{
 	uint8_t src;
 	uint8_t mode2;
 	uint8_t dst;
-}
+};

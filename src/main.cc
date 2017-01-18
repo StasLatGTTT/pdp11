@@ -1,20 +1,18 @@
 #include <iostream>
-#include <QApplication>
-#include <QTextEdit>
 
-#include "emul/emul_test.h"
-#include "gui/gui_test.h"
+#include "emul/proc.h"
+#include "gui/emulator.h"
 
 using namespace std;
 
 int main(int argc, char** argv){
 	cout<<"Hello world!"<<endl;
-	nothing(5);
-	everything(6);
-	QApplication app(argc, argv);
 
-	QTextEdit tedit;
-	tedit.show();
+	proc* cpu = NULL;
+	Emulator_App emulator(argc, argv, cpu);
+	int ret = emulator.run();
 
-	return app.exec();
+	//delete cpu;
+
+	return ret;
 }

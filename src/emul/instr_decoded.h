@@ -4,7 +4,7 @@
 #pragma once
 
 #include "interstate.h"
-#include "instruction_entry.h"
+#include "instr_entry.h"
 
 class instructions{
 
@@ -15,8 +15,8 @@ public:
 	~instructions();
 
 	//call every init_ method from below
-	init_all();
+	void init_all();
 
 private:
-	init_add();
-}
+	void init_add();
+};

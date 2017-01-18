@@ -7,11 +7,11 @@
 
 #include "instr_decoded.h"
 #include "memory_unit.h"
-#include "instr_entry"
+#include "instr_entry.h"
 
 class proc{
 	//64-bit
-	memory_unit* memory
+	memory_unit* memory;
 	instruction_entry* entry;
 
 	//32-bit
@@ -21,5 +21,5 @@ public:
 	proc();
 	~proc();
 
-	step();
-}
+	void step();
+};

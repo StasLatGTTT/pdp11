@@ -7,7 +7,7 @@
 #include "memory_unit.h"
 
 struct instruction_entry{
-	char[64] description;
+	char description[64];
 	int8_t opcode;
 	int8_t offset;
 	int8_t mode1;
