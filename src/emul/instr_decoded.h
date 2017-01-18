@@ -3,7 +3,7 @@
 */
 
 class instructions{
-	struct instr{
+	struct instruction_entry{
 		char[64] description;
 		int8_t opcode;
 		int8_t offset;
@@ -14,13 +14,14 @@ class instructions{
 	};
 
 public:
-	instr* decode;
+	instruction_entry* decode;
+
 	instructions();
 	~instructions();
 
+	//call every init_ method from below
 	init_all();
 
 private:
 	init_add();
-	init_sub();
 }
