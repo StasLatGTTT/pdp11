@@ -9,6 +9,7 @@
 
 class Emulator_App{
 	Proc* cpu;
+	QApplication* emul_app;
 	int argc;
 	char** argv;
 

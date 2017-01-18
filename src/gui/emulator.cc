@@ -6,13 +6,15 @@ Emulator_App::Emulator_App(int argc, char** argv, Proc* cpu){
 	this->argv = argv;
 }
 
-Emulator_App::~Emulator_App(){};
+Emulator_App::~Emulator_App(){
+	delete emul_app;
+};
 
 int Emulator_App::run(){
-	QApplication app(argc, argv);
+	emul_app = new QApplication(argc, argv);
 
 	QTextEdit tedit;
 	tedit.show();
 
-	return app.exec();
+	return emul_app->exec();
 }
