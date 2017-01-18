@@ -3,7 +3,7 @@
 */
 #pragma once
 
-struct memory_unit{
+struct Memory_unit{
 	int8_t* ram;
 	int16_t registers[8];
 	int8_t statword;

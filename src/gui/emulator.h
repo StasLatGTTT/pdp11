@@ -8,12 +8,12 @@
 #include "../emul/proc.h"
 
 class Emulator_App{
-	proc* cpu;
+	Proc* cpu;
 	int argc;
 	char** argv;
 
 public:
-	Emulator_App(int, char**, proc*);
+	Emulator_App(int, char**, Proc*);
 	~Emulator_App();
 
 	int run();

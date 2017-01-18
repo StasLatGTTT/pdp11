@@ -9,17 +9,17 @@
 #include "memory_unit.h"
 #include "instr_entry.h"
 
-class proc{
+class Proc{
 	//64-bit
-	memory_unit* memory;
-	instruction_entry* entry;
+	Memory_unit* memory;
+	Instruction_entry* entry;
 
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
 
 public:
-	proc();
-	~proc();
+	Proc();
+	~Proc();
 
 	void step();
 };

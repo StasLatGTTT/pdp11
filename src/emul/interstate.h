@@ -5,7 +5,7 @@
 */
 #pragma once
 
-struct interstate{
+struct Interstate{
 	uint8_t opcode;
 	uint8_t mode1;
 	uint8_t src;

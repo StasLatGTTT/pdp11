@@ -1,6 +1,6 @@
 #include "emulator.h"
 
-Emulator_App::Emulator_App(int argc, char** argv, proc* cpu){
+Emulator_App::Emulator_App(int argc, char** argv, Proc* cpu){
 	this->cpu = cpu;
 	this->argc = argc;
 	this->argv = argv;

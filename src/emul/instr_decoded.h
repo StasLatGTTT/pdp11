@@ -6,13 +6,13 @@
 #include "interstate.h"
 #include "instr_entry.h"
 
-class instructions{
+class Instructions{
 
 public:
-	instruction_entry* decode;
+	Instruction_entry* decode;
 
-	instructions();
-	~instructions();
+	Instructions();
+	~Instructions();
 
 	//call every init_ method from below
 	void init_all();
