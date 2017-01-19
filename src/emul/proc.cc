@@ -1,9 +1,15 @@
 #include "proc.h"
 
-Proc::Proc(){
+Proc::Proc(int16_t stack, int16_t prog){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
+
+	ticks_seqential = 0;
+	ticks_pipelined = 0;
+
+	this->stack = stack;
+	this->prog = prog;
 }
 
 Proc::~Proc(){

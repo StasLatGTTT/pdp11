@@ -16,11 +16,12 @@ class Proc{
 	Instruction_entry* decode;
 	Interstate* state;
 
+public:
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
+	int16_t stack, prog;
 
-public:
-	Proc();
+	Proc(int16_t, int16_t);
 	~Proc();
 
 	void step();

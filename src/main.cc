@@ -6,11 +6,12 @@
 using namespace std;
 
 int main(int argc, char** argv){
-	Proc* cpu = NULL;
+	Proc* cpu = new Proc(4095, 4096);
+
 	Emulator_App emulator(argc, argv, cpu);
 	int ret = emulator.run();
 
-	//delete cpu;
+	delete cpu;
 
 	return ret;
 }
