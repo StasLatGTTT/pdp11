@@ -9,7 +9,7 @@ Proc::Proc(){
 Proc::~Proc(){
 	delete memory;
 	delete state;
-	delete decode;
+	delete[] decode;
 }
 
 void Proc::step(){
