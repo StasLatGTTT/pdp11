@@ -5,6 +5,7 @@
 
 using namespace std;
 
+/*
 int main(int argc, char** argv){
 	Proc* cpu = new Proc(4095, 4096);
 
@@ -14,4 +15,15 @@ int main(int argc, char** argv){
 	delete cpu;
 
 	return ret;
+}
+//*/
+
+int main(int argc, char** argv){
+	Proc* cpu = new Proc(4095, 4096);
+
+	cpu->memory->registers[0] = 1;
+	cpu->memory->registers[1] = 1;
+
+	delete cpu;
+	return 0;
 }

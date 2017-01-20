@@ -11,13 +11,14 @@
 
 class Proc{
 	//64-bit
-	Memory_unit* memory;
+	// Memory_unit* memory; // changed by Yaric 
 	Instruction_entry* entry;
 	Instruction_entry* decode;
 	Interstate* state;
 
 public:
 	//32-bit
+	Memory_unit* memory;// changed by Yaric
 	int32_t ticks_seqential, ticks_pipelined;
 	int16_t stack, prog;
 

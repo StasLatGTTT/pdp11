@@ -3,7 +3,8 @@
 #include "instr_entry.h"
 #include "instr_implementation.h"
 
-int writeback_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
+int writeback_two_operand_1(Interstate* state, Memory_unit* memory,\
+   Instruction_entry* entry)
 {
   memory->registers[7]= state->pc;
   memory->registers[entry->src]= state->src;
