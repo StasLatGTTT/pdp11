@@ -6,11 +6,15 @@
 int writeback_two_operand_1(Interstate* state, Memory_unit* memory,\
    Instruction_entry* entry)
 {
-  if (entry->mode2 != 0)
-  {
     memory->registers[7]= state->pc;
     memory->registers[entry->src]= state->src;
     memory->registers[entry->dst]= state->dst;
+    
+  if (entry->mode2 != 0)
+  {
+    // memory->registers[7]= state->pc;
+    // memory->registers[entry->src]= state->src;
+    // memory->registers[entry->dst]= state->dst;
     // memory->ram[state->dst_adr]= state->dst_val;
     memory->store_word(state->dst_adr, &(state->dst_val));
   }
@@ -18,6 +22,8 @@ int writeback_two_operand_1(Interstate* state, Memory_unit* memory,\
   {
     memory->registers[entry->dst] = state->dst_val;
   }
+
+  //
 
   return 0;
 }

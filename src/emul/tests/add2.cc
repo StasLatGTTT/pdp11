@@ -26,9 +26,8 @@ int main(int argc, char** argv){
 
 	int32_t fake = 0;
 
-	cpu->memory->registers[7] = 100;
-	cpu->memory->registers[1] = (int16_t)4;
-	cpu->memory->registers[2] = (int16_t)2;
+	cpu->memory->registers[1] = (int16_t)2;
+	cpu->memory->registers[2] = (int16_t)4;
 
 	int16_t var = 10;
 	cpu->memory->store_word(4, &var);
@@ -40,19 +39,12 @@ int main(int argc, char** argv){
 	var = 40;
 	cpu->memory->store_word(30, &var);
 
-	var = 110;
-	cpu->memory->store_word(100, &var);
-	var = 50;
-	cpu->memory->store_word(120, &var);
-	var = 90;
-	cpu->memory->store_word(50, &var);
-
 	printf("R1= %d\nR2= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2] );
 
 	Instruction_entry entry;
-	entry.mode1 = 7;
-	entry.mode2 = 0;
+	entry.mode1 = 0;
+	entry.mode2 = 5;
 	entry.src = 1;
 	entry.dst = 2;
 
@@ -70,10 +62,8 @@ int main(int argc, char** argv){
 
 	cpu->memory->read_word(2, &var);
 	printf("ram[2]= %d\n", var);
-	cpu->memory->read_word(120, &var);
-	printf("ram[120]= %d\n", var);
-	cpu->memory->read_word(50, &var);
-	printf("ram[50]= %d\n", var);
+	cpu->memory->read_word(30, &var);
+	printf("ram[30]= %d\n", var);
 
 
 	delete cpu;

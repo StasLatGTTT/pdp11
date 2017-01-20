@@ -8,6 +8,8 @@ int execute_add(Interstate* state, Instruction_entry* entry)
 {
   int8_t overflow=0; //for future
   int16_t result=0;
+
+  printf("\nstate->src= %d\n", state->src);
   printf("state->dst= %d\n", state->dst);
 
   state->pc= state->pc + state->pc_delta;
@@ -15,7 +17,9 @@ int execute_add(Interstate* state, Instruction_entry* entry)
   state->dst= state->dst + state->dst_delta;
   result= state->src_val + state->dst_val;
   state->dst_val= result;
-   printf("state->dst= %d\n", state->dst);
+
+  printf("state->src= %d\n", state->src);
+  printf("state->dst= %d\n", state->dst);
 
   return 0;
 }

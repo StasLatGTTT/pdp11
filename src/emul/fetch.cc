@@ -72,9 +72,10 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       state->src_delta= -2;
       //(memory->registers[src])-= 2;
       //or 1, as earlier discribed
-      adr= memory->registers[src-2];
+      adr= memory->registers[src] -2;
       //there is (-2) because of reg[src] no changes
       // val= memory->ram[adr];
+      // CHECK ERROR !!
       memory->read_word(adr, &val);
       break;
     case 5:
@@ -82,7 +83,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // Auto-decrement deferred
       state->src_delta= -2;
       // (memory->registers[src])-= 2;
-      adr= memory->registers[src-2];
+      adr= memory->registers[src] -2;
       // adr= memory->ram[adr];
       memory->read_word(adr, &adr);
       // val= memory->ram[adr];
@@ -123,6 +124,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
 
   state->src_val= val;
   state->src_adr= adr;
+  printf("src_reg= %d, %d, %d\n", src, adr, val);
   ///////////////////////////////////////////////////////////
 
   val=0;
@@ -147,7 +149,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       adr= memory->registers[dst];
       // val= memory->ram[adr];
       memory->read_word(adr, &val);
-      printf("dst_reg= %d, %d, %d\n", dst, adr, val);
+    //   printf("dst_reg= %d, %d, %d\n", dst, adr, val);
       break;
     case 2:
       // (@Rn)+
@@ -179,9 +181,10 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       state->dst_delta= -2;
       //(memory->registers[dst])-= 2;
       //or 1, as earlier discribed
-      adr= memory->registers[dst-2];
+      adr= memory->registers[dst] -2;
       //there is (-2) because of reg[dst] no changes
       // val= memory->ram[adr];
+      // CHECK ERROR !!
       memory->read_word(adr, &val);
       break;
     case 5:
@@ -189,7 +192,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // Auto-decrement deferred
       state->src_delta= -2;
       // (memory->registers[dst])-= 2;
-      adr= memory->registers[dst-2];
+      adr= memory->registers[dst] -2;
       // adr= memory->ram[adr];
       memory->read_word(adr, &adr);
       // val= memory->ram[adr];
@@ -236,6 +239,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
 
   state->dst_val= val;
   state->dst_adr= adr;
+  printf("dst_reg= %d, %d, %d\n", dst, adr, val);
 
   return 0;
 }
