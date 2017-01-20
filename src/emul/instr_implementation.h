@@ -13,7 +13,7 @@ int fetch_two_operand_1(Interstate*, Memory_unit*, Instruction_entry*);
 int fetch_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
 
 //writeback implementations
-int writeback_two_operand_1_(Interstate*, Memory_unit*, Instruction_entry*);
+int writeback_two_operand_1(Interstate*, Memory_unit*, Instruction_entry*);
 int writeback_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
 
 //two operand executions
