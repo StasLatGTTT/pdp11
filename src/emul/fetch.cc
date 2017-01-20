@@ -2,6 +2,7 @@
 #include "memory_unit.h"
 #include "instr_entry.h"
 #include "instr_implementation.h"
+#include <iostream>
 
 int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
 {
@@ -146,6 +147,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       adr= memory->registers[dst];
       // val= memory->ram[adr];
       memory->read_word(adr, &val);
+      printf("dst_reg= %d, %d, %d\n", dst, adr, val);
       break;
     case 2:
       // (@Rn)+
