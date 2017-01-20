@@ -8,7 +8,8 @@ int writeback_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_
   memory->registers[7]= state->pc;
   memory->registers[entry->src]= state->src;
   memory->registers[entry->dst]= state->dst;
-  memory->ram[state->dst_adr]= state->dst_val;
+  // memory->ram[state->dst_adr]= state->dst_val;
+  memory->store_word(state->dst_adr, *(state->dst_val));
 
   return 0;
 }
