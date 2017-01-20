@@ -22,3 +22,6 @@ int writeback_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
 int execute_add(Interstate*, Instruction_entry*);
 int execute_sub(Interstate*, Instruction_entry*);
 int execute_mov(Interstate*, Instruction_entry*);
+int execute_cmp(Interstate*, Instruction_entry*);
+int execute_bit(Interstate*, Instruction_entry*);
+int execute_bic(Interstate*, Instruction_entry*);

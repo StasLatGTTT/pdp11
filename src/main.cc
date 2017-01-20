@@ -40,7 +40,7 @@ int main(int argc, char** argv){
 	entry.dst = 2;
 
 	fetch_two_operand_1(cpu->state, cpu->memory, &entry);
-	execute_mov(cpu->state, &entry);
+	execute_sub(cpu->state, &entry);
 	writeback_two_operand_1(cpu->state, cpu->memory, &entry);
 
 	printf("\tResult:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\
