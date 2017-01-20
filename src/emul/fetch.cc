@@ -9,6 +9,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
   int16_t pc=0;
   int16_t adr=0;
   int16_t nn=0;//index
+  int32_t fake=0;
 
   //copy state
   state->mode1= entry->mode1;
@@ -38,14 +39,14 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // Register deferred
       adr= memory->registers[src];
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 2:
       // (@Rn)+
       //  Auto-increment
       adr= memory->registers[src];
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       state->src_delta= 2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
@@ -60,9 +61,9 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       //(memory->registers[src])+= 2;
       //allways +=2
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 4:
       //-(Rn)
@@ -73,7 +74,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       adr= memory->registers[src-2];
       //there is (-2) because of reg[src] no changes
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 5:
       // @-(Rn)
@@ -82,40 +83,40 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // (memory->registers[src])-= 2;
       adr= memory->registers[src-2];
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 6:
       //nnRn
       //index
       pc= memory->registers[7];
       // nn= memory->ram[pc];
-      memory->read_word(pc, *nn);
+      memory->read_word(pc, &nn);
       state->pc_delta= 2;
       //(memory->registers[7])+= 2;
       adr= memory->registers[src];
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       adr= adr + nn;
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 7:
       //@nnRn
       //index dereffered
       pc= memory->registers[7];
       // nn= memory->ram[pc];
-      memory->read_word(pc, *nn);
+      memory->read_word(pc, &nn);
       state->pc_delta= 2;
       // (memory->registers[7])+= 2;
       adr= memory->registers[src];
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       // adr= memory->ram[adr+nn];
-      memory->read_word(adr+nn, *adr);
+      memory->read_word(adr+nn, &adr);
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
   }
 
@@ -144,14 +145,14 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // Register deferred
       adr= memory->registers[dst];
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 2:
       // (@Rn)+
       //  Auto-increment
       adr= memory->registers[dst];
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       state->dst_delta= 2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
@@ -166,9 +167,9 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       //(memory->registers[dst])+= 2;
       //allways +=2
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 4:
       //-(Rn)
@@ -179,7 +180,7 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       adr= memory->registers[dst-2];
       //there is (-2) because of reg[dst] no changes
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 5:
       // @-(Rn)
@@ -188,9 +189,9 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // (memory->registers[dst])-= 2;
       adr= memory->registers[dst-2];
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 6:
       //nnRn
@@ -200,15 +201,15 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // becouse of the changes, made when src worked
       // ????
       // nn= memory->ram[pc];
-      memory->read_word(pc, *nn);
+      memory->read_word(pc, &nn);
       state->pc_delta= 2;
       //(memory->registers[7])+= 2;
       adr= memory->registers[dst];
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       adr= adr + nn;
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
     case 7:
       //@nnRn
@@ -218,16 +219,16 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
       // becouse of the changes, made when src worked
       // ????
       // nn= memory->ram[pc];
-      memory->read_word(pc, *nn);
+      memory->read_word(pc, &nn);
       state->pc_delta= 2;
       // (memory->registers[7])+= 2;
       adr= memory->registers[dst];
       // adr= memory->ram[adr];
-      memory->read_word(adr, *adr);
+      memory->read_word(adr, &adr);
       // adr= memory->ram[adr+nn];
-      memory->read_word(adr+nn, *adr);
+      memory->read_word(adr+nn, &adr);
       // val= memory->ram[adr];
-      memory->read_word(adr, *val);
+      memory->read_word(adr, &val);
       break;
   }
 
