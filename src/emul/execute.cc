@@ -3,7 +3,7 @@
 #include "instr_entry.h"
 #include "instr_implementation.h"
 
-int add_execute(Interstate* state, Instruction_entry* entry)
+int execute_add(Interstate* state, Instruction_entry* entry)
 {
   int8_t overflow=0; //for future
   int16_t result=0;
