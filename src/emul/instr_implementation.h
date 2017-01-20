@@ -8,8 +8,15 @@
 #include "memory_unit.h"
 #include "instr_entry.h"
 
-//add instruction implementation
-int add_fetch(Interstate*, Memory_unit*, Instruction_entry*);
-int add_execute(Interstate*, Instruction_entry*);
-int add_writeback(Interstate*, Memory_unit*, Instruction_entry*);
-void add_disasm(Instruction_entry*);
+//fetch implementations
+int fetch_two_operand_1(Interstate*, Memory_unit*, Instruction_entry*);
+int fetch_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
+
+//writeback implementations
+int writeback_two_operand_1_(Interstate*, Memory_unit*, Instruction_entry*);
+int writeback_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
+
+//two operand executions
+//TODO first two tables from pdp-11 architecture wiki article
+//https://en.wikipedia.org/wiki/PDP-11_architecture
+int execute_add(Interstate*, Instruction_entry*);
