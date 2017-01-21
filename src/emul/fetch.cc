@@ -4,7 +4,7 @@
 #include "instr_implementation.h"
 #include <iostream>
 
-int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
+int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
 {
   int16_t val=0;
   int16_t pc=0;
@@ -247,9 +247,10 @@ int fetch_two_operand_1(Interstate* state, Memory_unit* memory, Instruction_entr
 int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
 {
   int8_t val=0;
+  int8_t tmp_adr=0;
+  int8_t nn=0;//index
   int16_t pc=0;
   int16_t adr=0;
-  int16_t nn=0;//index
   int32_t fake=0;
 
   //copy state
@@ -288,7 +289,9 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       adr= memory->registers[src];
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
-      state->src_delta= 2;
+      state->src_delta= 1;
+      if (src==6) state->src_delta= 2;
+      if (src==7) state->src_delta= 2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
       //sp+=2
@@ -302,14 +305,17 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       //(memory->registers[src])+= 2;
       //allways +=2
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t)tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
     case 4:
       //-(Rn)
       // Auto-decrement
-      state->src_delta= -2;
+      state->src_delta= -1;
+      if (src==6) state->src_delta= -2;
+      if (src==7) state->src_delta= -2;
       //(memory->registers[src])-= 2;
       //or 1, as earlier discribed
       adr= memory->registers[src] -2;
@@ -325,7 +331,8 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       // (memory->registers[src])-= 2;
       adr= memory->registers[src] -2;
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t)tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -339,8 +346,8 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       //(memory->registers[7])+= 2;
       adr= memory->registers[src];
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
-      adr= adr + nn;
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t)(tmp_adr + nn);
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -354,9 +361,11 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       // (memory->registers[7])+= 2;
       adr= memory->registers[src];
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t)(tmp_adr + nn);
       // adr= memory->ram[adr+nn];
-      memory->read_byte(adr+nn, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -397,7 +406,9 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       adr= memory->registers[dst];
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
-      state->dst_delta= 2;
+      state->dst_delta= 1;
+      if (dst==6) state->dst_delta= 2;
+      if (dst==7) state->dst_delta= 2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
       //sp+=2
@@ -411,14 +422,17 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       //(memory->registers[dst])+= 2;
       //allways +=2
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
     case 4:
       //-(Rn)
       // Auto-decrement
-      state->dst_delta= -2;
+      state->dst_delta= -1;
+      if (dst==6) state->dst_delta= -2;
+      if (dst==7) state->dst_delta= -2;
       //(memory->registers[dst])-= 2;
       //or 1, as earlier discribed
       adr= memory->registers[dst] -2;
@@ -434,7 +448,8 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       // (memory->registers[dst])-= 2;
       adr= memory->registers[dst] -2;
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -451,8 +466,8 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       //(memory->registers[7])+= 2;
       adr= memory->registers[dst];
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
-      adr= adr + nn;
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t) (tmp_adr + nn);
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -469,9 +484,11 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
       // (memory->registers[7])+= 2;
       adr= memory->registers[dst];
       // adr= memory->ram[adr];
-      memory->read_byte(adr, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t) (tmp_adr + nn);
       // adr= memory->ram[adr+nn];
-      memory->read_byte(adr+nn, &adr);
+      memory->read_byte(adr, &tmp_adr);
+      adr= (int16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;

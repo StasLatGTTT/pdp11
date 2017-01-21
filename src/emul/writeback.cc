@@ -3,7 +3,7 @@
 #include "instr_entry.h"
 #include "instr_implementation.h"
 
-int writeback_two_operand_1(Interstate* state, Memory_unit* memory,\
+int writeback_two_operand_1_word(Interstate* state, Memory_unit* memory,\
    Instruction_entry* entry)
 {
     memory->registers[7]= state->pc;
@@ -21,7 +21,31 @@ int writeback_two_operand_1(Interstate* state, Memory_unit* memory,\
     memory->registers[entry->dst] = state->dst_val;
   }
 
-  //
+  return 0;
+}
+
+int writeback_two_operand_1_byte(Interstate* state, Memory_unit* memory,\
+   Instruction_entry* entry)
+{
+    memory->registers[7]= state->pc;
+    memory->registers[entry->src]= state->src;
+    memory->registers[entry->dst]= state->dst;
+    memory->statword= state->statword;
+
+    int8_t tmp_val =0;
+    tmp_val= (int8_t)(state->dst_val);
+
+  if (entry->mode2 != 0)
+  {
+    // int8_t tmp_val =0;
+    // memory->ram[state->dst_adr]= state->dst_val;
+    // tmp_val= (int8_t)(state->dst_val)
+    memory->store_byte(state->dst_adr, &tmp_val);
+  }
+  else
+  {
+    memory->registers[entry->dst] = (int16_t)tmp_val;
+  }
 
   return 0;
 }

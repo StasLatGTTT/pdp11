@@ -39,9 +39,12 @@ int main(int argc, char** argv){
 	entry.src = 1;
 	entry.dst = 2;
 
-	fetch_two_operand_1(cpu->state, cpu->memory, &entry);
-	execute_bic(cpu->state, &entry);
-	writeback_two_operand_1(cpu->state, cpu->memory, &entry);
+	// fetch_two_operand_1_word(cpu->state, cpu->memory, &entry);
+	// execute_add(cpu->state, &entry);
+	// writeback_two_operand_1_word(cpu->state, cpu->memory, &entry);
+	fetch_two_operand_1_byte(cpu->state, cpu->memory, &entry);
+	execute_addb(cpu->state, &entry);
+	writeback_two_operand_1_byte(cpu->state, cpu->memory, &entry);
 
 	printf("\tResult:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2] );
