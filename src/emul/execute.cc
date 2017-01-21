@@ -24,7 +24,7 @@ int execute_add(Interstate* state, Instruction_entry* entry)
   result= state->src_val + state->dst_val;
   check_result= state->src_val + state->dst_val;
 
-  if ((int16_t)result != check_result)
+  if ((1<<8)& check_result)
   {
       flags+= 1;
   }
@@ -52,10 +52,10 @@ int execute_add(Interstate* state, Instruction_entry* entry)
 
 int execute_sub(Interstate* state, Instruction_entry* entry)
 {
-state->src_val*= -1;
-execute_add(state, entry);
+    state->src_val*= -1;
+    execute_add(state, entry);
 
-return 0;
+    return 0;
 }
 
 int execute_mov(Interstate* state, Instruction_entry* entry)
@@ -106,7 +106,7 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
     result= state->src_val + state->dst_val;
     check_result= state->src_val + state->dst_val;
 
-    if ((int16_t)result != check_result)
+    if ((1<<8)& check_result)
     {
         flags+= 1;
     }
@@ -155,6 +155,7 @@ int execute_bit(Interstate* state, Instruction_entry* entry)
 
     return 0;
 }
+
 int execute_bic(Interstate* state, Instruction_entry* entry)
 {
     int8_t flags=0;
@@ -164,7 +165,33 @@ int execute_bic(Interstate* state, Instruction_entry* entry)
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
     //D &= ^S
-    result= (state->dst_val)&^(state->src_val);
+    result= (state->dst_val)&(~(state->src_val));
+
+
+    if (result == 0)
+    {
+        flags+= 4;
+    }
+    if (result <0)
+    {
+        flags+= 8;
+    }
+
+    state->dst_val= result;
+    state->statword= state->statword | flags;
+
+    return 0;
+}
+
+int execute_bis(Interstate* state, Instruction_entry* entry)
+{
+    int8_t flags=0;
+    int16_t result=0;
+
+    state->pc= state->pc + state->pc_delta;
+    state->src= state->src + state->src_delta;
+    state->dst= state->dst + state->dst_delta;
+    result= (state->dst_val)|(state->src_val);
 
     if (result == 0)
     {

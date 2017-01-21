@@ -25,3 +25,4 @@ int execute_mov(Interstate*, Instruction_entry*);
 int execute_cmp(Interstate*, Instruction_entry*);
 int execute_bit(Interstate*, Instruction_entry*);
 int execute_bic(Interstate*, Instruction_entry*);
+int execute_bis(Interstate*, Instruction_entry*);

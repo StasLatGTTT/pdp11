@@ -24,7 +24,7 @@ int main(int argc, char** argv){
 int main(int argc, char** argv){
 	Proc* cpu = new Proc(4095, 4096);
 
-	int32_t fake = 0;
+	int8_t fake = 0;
 
 	cpu->memory->registers[7] = 100;
 	cpu->memory->registers[1] = 4;
@@ -40,12 +40,11 @@ int main(int argc, char** argv){
 	entry.dst = 2;
 
 	fetch_two_operand_1(cpu->state, cpu->memory, &entry);
-	execute_sub(cpu->state, &entry);
+	execute_bic(cpu->state, &entry);
 	writeback_two_operand_1(cpu->state, cpu->memory, &entry);
 
 	printf("\tResult:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2] );
-
 
 	delete cpu;
 	return 0;
