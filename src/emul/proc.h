@@ -17,13 +17,12 @@ class Proc{
 
 public:
 	Memory_unit* memory;
-	char* binary;
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
 	uint16_t stack, prog, prog_len;
 
 	Proc(uint16_t, uint16_t);
-	Proc(uint16_t, uint16_t, char* filename);
+	Proc(uint16_t, uint16_t, char*);
 	~Proc();
 
 	void step();
