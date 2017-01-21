@@ -15,6 +15,6 @@ public:
 	Bin_interface();
 	~Bin_interface();
 
-	void load_to_memory(Memory_unit*, char*, uint16_t);
-	void save_to_bin(Memory_unit*, char*, uint16_t, uint16_t);
+	void load_to_memory(Memory_unit*, char*, uint16_t*, uint16_t);
+	void save_to_bin(Memory_unit*, char*, uint16_t*, uint16_t);
 };

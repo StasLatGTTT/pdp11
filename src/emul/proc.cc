@@ -1,6 +1,6 @@
 #include "proc.h"
 
-Proc::Proc(int16_t stack, int16_t prog){
+Proc::Proc(uint16_t stack, uint16_t prog){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
