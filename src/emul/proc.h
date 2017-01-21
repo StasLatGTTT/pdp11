@@ -20,11 +20,10 @@ public:
 	Memory_unit* memory;
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
-	uint16_t stack, prog, prog_len;
-	Metadata meta;
+	Metadata* meta;
 
-	Proc(uint16_t, uint16_t);
-	Proc(uint16_t, uint16_t, char*);
+	Proc(Metadata*);
+	Proc(Metadata*, char*);
 	~Proc();
 
 	void step();

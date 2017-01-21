@@ -3,7 +3,7 @@
 #include "proc.h"
 #include "bin_interface.h"
 
-Proc::Proc(uint16_t stack, uint16_t prog){
+Proc::Proc(Metadata* metadata){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
@@ -11,11 +11,10 @@ Proc::Proc(uint16_t stack, uint16_t prog){
 	ticks_seqential = 0;
 	ticks_pipelined = 0;
 
-	this->stack = stack;
-	this->prog = prog;
+	meta = metadata;
 }
 
-Proc::Proc(uint16_t stack, uint16_t prog, char* bin){
+Proc::Proc(Metadata* metadata, char* bin){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
@@ -23,11 +22,10 @@ Proc::Proc(uint16_t stack, uint16_t prog, char* bin){
 	ticks_seqential = 0;
 	ticks_pipelined = 0;
 
-	this->stack = stack;
-	this->prog = prog;
+	meta = metadata;
 
 	Bin_interface* loader = new Bin_interface();
-	loader->load_to_memory(memory, bin, &(this->prog_len), prog);
+	loader->load_to_memory(memory, bin, &(meta->prog_len), meta->prog_start);
 	delete loader;
 }
 

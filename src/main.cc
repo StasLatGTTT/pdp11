@@ -7,15 +7,16 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-	Metadata meta;
+	Metadata* meta = new Metadata();
 
-	
-	Proc* cpu = new Proc(4095, 4096);
+
+	Proc* cpu = new Proc(meta);
 
 	Emulator_App emulator(argc, argv, cpu);
 	int ret = emulator.run();
 
 	delete cpu;
+	delete meta;
 
 	return ret;
 }
