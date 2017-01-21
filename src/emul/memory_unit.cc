@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include "memory_unit.h"
 
 Memory_unit::Memory_unit(){
@@ -29,4 +31,12 @@ int32_t Memory_unit::read_byte(int16_t adr, int8_t* dst){
 int32_t Memory_unit::store_byte(int16_t adr, int8_t* src){
 	ram[adr] = *src;
 	return -1;
+}
+
+void Memory_unit::read_line(int16_t adr, int16_t len, int8_t* dst){
+	memcpy(dst, &ram[adr], len);
+}
+
+void Memory_unit::store_line(int16_t adr, int16_t len, int8_t* src){
+	memcpy(&ram[adr], src, len);
 }
