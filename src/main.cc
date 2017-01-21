@@ -6,6 +6,10 @@
 using namespace std;
 
 int main(int argc, char** argv){
+
+	Metadata meta;
+
+	
 	Proc* cpu = new Proc(4095, 4096);
 
 	Emulator_App emulator(argc, argv, cpu);
