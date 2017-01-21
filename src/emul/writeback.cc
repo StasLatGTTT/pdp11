@@ -51,3 +51,11 @@ int writeback_two_operand_1_byte(Interstate* state, Memory_unit* memory,\
 
   return 0;
 }
+
+int writeback_conditional_branch(Interstate* state, Memory_unit* memory,\
+   Instruction_entry* entry)
+{
+    memory->registers[7]= state->pc;
+
+    return 0;
+}

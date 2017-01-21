@@ -14,6 +14,7 @@ struct Interstate{
 	uint16_t pc_delta;
 
 	uint8_t opcode;
+	int8_t offset;
 	uint8_t mode1;//src adr mode
 	uint8_t mode2;//dst adr mode
 

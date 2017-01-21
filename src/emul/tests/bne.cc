@@ -50,7 +50,7 @@ int main(int argc, char** argv){
 	writeback_two_operand_1_word(cpu->state, cpu->memory, &entry);
 
 	fetch_conditional_branch(cpu->state, cpu->memory, &entry);
-	execute_bgt(cpu->state, &entry);
+	execute_bne(cpu->state, &entry);
 	writeback_conditional_branch(cpu->state, cpu->memory, &entry);
 
 	printf("\tResult:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\

@@ -4,7 +4,8 @@
 #include "instr_implementation.h"
 #include <iostream>
 
-int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
+int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
+    Instruction_entry* entry)
 {
   int16_t val=0;
   int16_t pc=0;
@@ -243,8 +244,8 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, Instruction
 
   return 0;
 }
-
-int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction_entry* entry)
+int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
+    Instruction_entry* entry)
 {
   int8_t val=0;
   int8_t tmp_adr=0;
@@ -499,4 +500,13 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, Instruction
   printf("dst_reg= %d, %d, %d\n", dst, adr, val);
 
   return 0;
+}
+int fetch_conditional_branch(Interstate* state, Memory_unit* memory, \
+    Instruction_entry* entry)
+{
+    state->pc= memory->registers[7];
+    state->statword= memory->statword;
+    state->pc_delta= (int16_t)entry->offset;
+
+    return 0;
 }
