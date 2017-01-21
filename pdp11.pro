@@ -11,3 +11,5 @@ OBJECTS_DIR = bin/.obj
 QMAKE_CXXFLAGS += -std=c++11 -g -O1
 
 FORMS += config/testwidget.ui
+
+UI_DIR = src/gui

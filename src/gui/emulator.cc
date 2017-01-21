@@ -1,6 +1,6 @@
 #include "emulator.h"
 
-#include "../../ui_testwidget.h"
+#include "ui_testwidget.h"
 
 Emulator_App::Emulator_App(int argc, char** argv, Proc* cpu){
 	this->cpu = cpu;
