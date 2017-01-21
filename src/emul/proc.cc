@@ -12,6 +12,9 @@ Proc::Proc(Metadata* metadata){
 	ticks_pipelined = 0;
 
 	meta = metadata;
+
+	memory->PC = meta->prog_start;
+	memory->SP = meta->stack_root;
 }
 
 Proc::Proc(Metadata* metadata, char* bin){
@@ -23,6 +26,9 @@ Proc::Proc(Metadata* metadata, char* bin){
 	ticks_pipelined = 0;
 
 	meta = metadata;
+
+	memory->PC = meta->prog_start;
+	memory->SP = meta->stack_root;
 
 	Bin_interface* loader = new Bin_interface();
 	loader->load_to_memory(memory, bin, &(meta->prog_len), meta->prog_start);
