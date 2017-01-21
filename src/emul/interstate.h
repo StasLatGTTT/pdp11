@@ -9,7 +9,7 @@
 
 struct Interstate{
 	int8_t statword;
-	
+
 	uint16_t pc;
 	uint16_t pc_delta;
 

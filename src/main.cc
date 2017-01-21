@@ -43,7 +43,7 @@ int main(int argc, char** argv){
 	// execute_add(cpu->state, &entry);
 	// writeback_two_operand_1_word(cpu->state, cpu->memory, &entry);
 	fetch_two_operand_1_byte(cpu->state, cpu->memory, &entry);
-	execute_addb(cpu->state, &entry);
+	execute_movb(cpu->state, &entry);
 	writeback_two_operand_1_byte(cpu->state, cpu->memory, &entry);
 
 	printf("\tResult:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\
