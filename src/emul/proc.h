@@ -10,12 +10,12 @@
 #include "instr_entry.h"
 
 class Proc{
+public:
 	//64-bit
 	Instruction_entry* entry;
 	Instruction_entry* decode;
 	Interstate* state;
 
-public:
 	Memory_unit* memory;
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
