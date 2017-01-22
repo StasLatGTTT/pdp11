@@ -31,24 +31,13 @@ int main(int argc, char** argv){
 	Instruction_entry *entry;
 
 	cpu->memory->registers[7] = 100;
-	cpu->memory->registers[1] = 2; //4
-	cpu->memory->registers[2] = 4; //2
-
-	// cpu->memory->ram[4]= 100;
-	// cpu->memory->ram[2]= 50;
-	int16_t val;
-	val =50;
-	cpu->memory->store_word(2, &val);
-	val =100;
-	cpu->memory->store_word(4, &val);
+	cpu->memory->registers[1] = 4; //4
+	cpu->memory->registers[2] = 2; //2
 
 	table->init_all();
 	printf("Decode table initialised\n");
-	// int16_t instr= 0x124a; // 0x1042
-	// int16_t instr= 0b0000000000000000;
-	int16_t instr= 0b0110001001001010;//0b0000000000000000;
-
-	cout<< "Hex 0x"<< hex << instr << "= Dec " << dec << instr << endl;
+	int16_t instr= 0x6042; // 0x1042
+	cout<< "Hex 0x "<< hex << instr << "= Dec" << dec << instr << endl;
 	printf("table[%d].src= \t%d\n", instr, table->decode[instr].src);
 	printf("table[%d].mode1= \t%d\n", instr, table->decode[instr].mode1);
 	printf("table[%d].dst= \t%d\n", instr, table->decode[instr].dst);
@@ -59,11 +48,6 @@ int main(int argc, char** argv){
 	printf("\tStart:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2], cpu->memory->registers[7] );
 
-	 cpu->memory->read_word(2, &val);
-	 printf("RAM[2]= %d\n", val);
-	 cpu->memory->read_word(4, &val);
-	 printf("RAM[4]= %d\n", val);
-
 	entry = &(table->decode[instr]);
 
 	entry->fetch(cpu->state, cpu->memory, entry);
@@ -73,10 +57,6 @@ int main(int argc, char** argv){
 	printf("\tResult:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2], cpu->memory->registers[7] );
 
-	 cpu->memory->read_word(2, &val);
-	 printf("RAM[2]= %d\n", val);
-	 cpu->memory->read_word(4, &val);
-	 printf("RAM[4]= %d\n", val);
 
 	delete cpu;
 	return 0;

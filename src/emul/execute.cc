@@ -455,7 +455,6 @@ int execute_bhi(Interstate* state, Instruction_entry* entry)
 
     return 0;
 }
-
 int execute_blos(Interstate* state, Instruction_entry* entry)
 {
     state->pc+=2;
@@ -472,7 +471,6 @@ int execute_blos(Interstate* state, Instruction_entry* entry)
 
     return 0;
 }
-
 int execute_bvc(Interstate* state, Instruction_entry* entry)
 {
     state->pc+=2;

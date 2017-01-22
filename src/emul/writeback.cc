@@ -6,6 +6,8 @@
 int writeback_two_operand_1_word(Interstate* state, Memory_unit* memory,\
    Instruction_entry* entry)
 {
+    printf("writeback_two_operand_1_word\n");
+
     memory->registers[7]= state->pc;
     memory->registers[entry->src]= state->src;
     memory->registers[entry->dst]= state->dst;
@@ -20,6 +22,10 @@ int writeback_two_operand_1_word(Interstate* state, Memory_unit* memory,\
   {
     memory->registers[entry->dst] = state->dst_val;
   }
+
+  printf("state->dst= %d\n", state->dst);
+  printf("state->src= %d\n", state->src);
+  // printf("state->dst= %d\n", state->dst);
 
   return 0;
 }
