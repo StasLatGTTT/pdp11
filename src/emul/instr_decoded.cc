@@ -91,6 +91,7 @@ void Instructions::init_all()
 		switch (op4)
 		{
 			case 0x1000:
+			// MOV
 				std::printf("\tcase 0x1000 - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
@@ -101,20 +102,87 @@ void Instructions::init_all()
 					decode[i].fetch= fetch_two_operand_1_word;
 					decode[i].execute= execute_mov;
 					decode[i].writeback= writeback_two_operand_1_word;
+					// decode[i].description= "MOV\0";
 				}
 				break;
 
-			// case 0x2000:
-			// 	for (i; i<(1<<12); i++)
-			// 	{
-			// 		two_operand_init_1(this, i);
-			// 		decode[i].fetch= fetch_two_operand_1_word;
-			// 		decode[i].execute= execute_cmp;
-			// 		decode[i].writeback= writeback_two_operand_1_word;
-			// 	}
-			// 	break;
+			case 0x2000:
+			// CMP
+				std::printf("\tcase 0x2000 - OK\n" );
+				j =i;
+				for (i =j; i<(j+(1<<12)); i++)
+				{
+					// std::printf("\t\t inside case 0x1000:\n" );
+					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					two_operand_init_1(this, i);
+					decode[i].fetch= fetch_two_operand_1_word;
+					decode[i].execute= execute_cmp;
+					decode[i].writeback= writeback_two_operand_1_word;
+				}
+				break;
 
-			
+			case 0x3000:
+			// BIT
+				std::printf("\tcase 0x3000 - OK\n" );
+				j =i;
+				for (i =j; i<(j+(1<<12)); i++)
+				{
+					// std::printf("\t\t inside case 0x1000:\n" );
+					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					two_operand_init_1(this, i);
+					decode[i].fetch= fetch_two_operand_1_word;
+					decode[i].execute= execute_bit;
+					decode[i].writeback= writeback_two_operand_1_word;
+				}
+				break;
+
+			case 0x4000:
+			// BIC
+				std::printf("\tcase 0x4000 - OK\n" );
+				j =i;
+				for (i =j; i<(j+(1<<12)); i++)
+				{
+					// std::printf("\t\t inside case 0x1000:\n" );
+					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					two_operand_init_1(this, i);
+					decode[i].fetch= fetch_two_operand_1_word;
+					decode[i].execute= execute_bic;
+					decode[i].writeback= writeback_two_operand_1_word;
+				}
+				break;
+
+				case 0x5000:
+				// BIS
+					std::printf("\tcase 0x5000 - OK\n" );
+					j =i;
+					for (i =j; i<(j+(1<<12)); i++)
+					{
+						// std::printf("\t\t inside case 0x1000:\n" );
+						// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+						two_operand_init_1(this, i);
+						decode[i].fetch= fetch_two_operand_1_word;
+						decode[i].execute= execute_bis;
+						decode[i].writeback= writeback_two_operand_1_word;
+					}
+					break;
+
+				case 0x6000:
+				// ADD
+					std::printf("\tcase 0x6000 - OK\n" );
+					j =i;
+					for (i =j; i<(j+(1<<12)); i++)
+					{
+						// std::printf("\t\t inside case 0x1000:\n" );
+						// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+						two_operand_init_1(this, i);
+						decode[i].fetch= fetch_two_operand_1_word;
+						decode[i].execute= execute_add;
+						decode[i].writeback= writeback_two_operand_1_word;
+					}
+					break;
+
+
+
 		}
 
 	}

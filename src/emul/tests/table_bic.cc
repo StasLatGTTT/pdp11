@@ -29,18 +29,18 @@ int main(int argc, char** argv){
 
 	cpu->memory->registers[7] = 100;
 	cpu->memory->registers[1] = 4; //4
-	cpu->memory->registers[2] = 2; //2
+	cpu->memory->registers[2] = 7; //2
 
 	table->init_all();
 	printf("Decode table initialised\n");
-	int16_t instr= 0x6042;
+	int16_t instr= 0x4042;
 	cout<< "Hex 0x "<< hex << instr << "= Dec" << dec << instr << endl;
 	printf("table[%d].src= \t%d\n", instr, table->decode[instr].src);
 	printf("table[%d].mode1= \t%d\n", instr, table->decode[instr].mode1);
 	printf("table[%d].dst= \t%d\n", instr, table->decode[instr].dst);
 	printf("table[%d].mode2= \t%d\n", instr, table->decode[instr].mode2);
-	printf("\tStart:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
-	 cpu->memory->registers[2], cpu->memory->registers[7] );
+	printf("\tStart:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\
+	 cpu->memory->registers[2] );
 
 	entry = &(table->decode[instr]);
 
@@ -48,8 +48,8 @@ int main(int argc, char** argv){
 	entry->execute(cpu->state, entry);
 	entry->writeback(cpu->state, cpu->memory, entry);
 
-	printf("\tResult:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
-	 cpu->memory->registers[2], cpu->memory->registers[7] );
+	printf("\tResult:\nR1= %d\nR2= %d\n", cpu->memory->registers[1],\
+	 cpu->memory->registers[2] );
 
 	delete cpu;
 	return 0;
