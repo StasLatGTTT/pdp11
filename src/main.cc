@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "emul/proc.h"
 #include "gui/emulator.h"
@@ -33,12 +36,15 @@ int main(int argc, char** argv){
 
 	table->init_all();
 	printf("Decode table initialised\n");
-	int16_t instr= 0x6042;
+	int16_t instr= 0x6042; // 0x1042
 	cout<< "Hex 0x "<< hex << instr << "= Dec" << dec << instr << endl;
 	printf("table[%d].src= \t%d\n", instr, table->decode[instr].src);
 	printf("table[%d].mode1= \t%d\n", instr, table->decode[instr].mode1);
 	printf("table[%d].dst= \t%d\n", instr, table->decode[instr].dst);
 	printf("table[%d].mode2= \t%d\n", instr, table->decode[instr].mode2);
+	printf("table[%d].descr= \t%s\n", instr, \
+	table->decode[instr].description);
+
 	printf("\tStart:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2], cpu->memory->registers[7] );
 
@@ -50,6 +56,7 @@ int main(int argc, char** argv){
 
 	printf("\tResult:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2], cpu->memory->registers[7] );
+
 
 	delete cpu;
 	return 0;

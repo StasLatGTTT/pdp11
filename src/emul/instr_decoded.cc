@@ -1,6 +1,8 @@
 #include "instr_decoded.h"
 #include "instr_implementation.h"
 #include <iostream>
+#include <string.h>
+
 
 
 Instructions::Instructions()
@@ -23,59 +25,119 @@ void two_operand_init_1(Instructions* i_table, long long unsigned i)
 	i_table->decode[i].src=		(i & 0x01c0)>>6;// 0 000. 000 1.11 00.0 000
 	i_table->decode[i].mode1=	(i & 0x0e00)>>9;// 0 000. 111 0.00 00.0 000
 
-	// if((i_table->decode[i].mode1 ==0) &&(i_table->decode[i].mode2 ==0)\
-	//  && (i_table->decode[i].src ==1))
-	//  {
-	// 	 std::printf("decode[%llu]= %d\n", i, i_table->decode[i].dst);
-	//  }
 	//  std::printf("decode[%llu]\n", i);
 	// std::cout<< "decode[ " << std::hex << i << " ]" <<std::endl;
 
 }
 
-// // Logical one
-//
-// void Instructions::init_all()
-// {
-// 	long long unsigned i;
-// 	for (i=0; i<(1<<16); i++)
-// 	{
-// 		init_add(i);
-// 	}
-// }
+void two_operand_descript_1(Instructions* i_table, long long unsigned i)
+{
+	char buffer[12];
+	switch (i_table->decode[i].mode1)
+	{
+		case 0:
+			strcat((i_table->decode[i].description), "R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), " ");
+			break;
+		case 1:
+			strcat((i_table->decode[i].description), "(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 2:
+			strcat((i_table->decode[i].description), "(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ")+ ");
+			break;
+		case 3:
+			strcat((i_table->decode[i].description), "@(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ")+ ");
+			break;
+		case 4:
+			strcat((i_table->decode[i].description), "-(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 5:
+			strcat((i_table->decode[i].description), "@-(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 6:
+			strcat((i_table->decode[i].description), "nn(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 7:
+			strcat((i_table->decode[i].description), "@nn(R");
+			sprintf(buffer, "%d", (i_table->decode[i].src) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+	}
 
-// // Stable one
-//
-// void Instructions::init_all()
-// {
-// 	long long unsigned i=0, j =0;
-// 	int8_t bw=0, op=0;
-// 	int16_t op4 =0;
-// 	int8_t mode_src, mode_dst, res_src, res_dst;
-//
-// 	for (i=0; i<(1<<16); i++)
-// 	{
-// 		op4= i & 0xF000;
-//
-// 		if(op4 ==0x1000)
-// 		{
-// 			j= i;
-// 			for (i; i<(1<<12); i++)
-// 			{
-// 				//
-// 				two_operand_init_1(this, i);
-//
-// 				decode[i].fetch= fetch_two_operand_1_word;
-// 				decode[i].execute= execute_mov;
-// 				decode[i].writeback= writeback_two_operand_1_word;
-//
-// 			}
-//
-// 		}
-//
-//
-// 	}
-// }
+	switch (i_table->decode[i].mode2)
+	{
+		case 0:
+			strcat((i_table->decode[i].description), "R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), " ");
+			break;
+		case 1:
+			strcat((i_table->decode[i].description), "(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 2:
+			strcat((i_table->decode[i].description), "(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ")+ ");
+			break;
+		case 3:
+			strcat((i_table->decode[i].description), "@(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ")+ ");
+			break;
+		case 4:
+			strcat((i_table->decode[i].description), "-(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 5:
+			strcat((i_table->decode[i].description), "@-(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 6:
+			strcat((i_table->decode[i].description), "nn(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+		case 7:
+			strcat((i_table->decode[i].description), "@nn(R");
+			sprintf(buffer, "%d", (i_table->decode[i].dst) );
+			strcat((i_table->decode[i].description), buffer);
+			strcat((i_table->decode[i].description), ") ");
+			break;
+	}
+
+}
 
 void Instructions::init_all()
 {
@@ -91,97 +153,102 @@ void Instructions::init_all()
 		switch (op4)
 		{
 			case 0x1000:
-			// MOV
 				std::printf("\tcase 0x1000 - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
-					// std::printf("\t\t inside case 0x1000:\n" );
-					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					strcat((decode[i].description), "MOV ");
 					two_operand_init_1(this, i);
 					decode[i].fetch= fetch_two_operand_1_word;
 					decode[i].execute= execute_mov;
 					decode[i].writeback= writeback_two_operand_1_word;
-					// decode[i].description= "MOV\0";
+					two_operand_descript_1(this, i);
 				}
 				break;
 
 			case 0x2000:
-			// CMP
 				std::printf("\tcase 0x2000 - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
-					// std::printf("\t\t inside case 0x1000:\n" );
-					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					strcat((decode[i].description), "CMP ");
 					two_operand_init_1(this, i);
 					decode[i].fetch= fetch_two_operand_1_word;
 					decode[i].execute= execute_cmp;
 					decode[i].writeback= writeback_two_operand_1_word;
+					two_operand_descript_1(this, i);
 				}
 				break;
 
 			case 0x3000:
-			// BIT
 				std::printf("\tcase 0x3000 - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
-					// std::printf("\t\t inside case 0x1000:\n" );
-					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					strcat((decode[i].description), "BIT ");
 					two_operand_init_1(this, i);
 					decode[i].fetch= fetch_two_operand_1_word;
 					decode[i].execute= execute_bit;
 					decode[i].writeback= writeback_two_operand_1_word;
+					two_operand_descript_1(this, i);
 				}
 				break;
 
 			case 0x4000:
-			// BIC
 				std::printf("\tcase 0x4000 - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
-					// std::printf("\t\t inside case 0x1000:\n" );
-					// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+					strcat((decode[i].description), "BIC ");
 					two_operand_init_1(this, i);
 					decode[i].fetch= fetch_two_operand_1_word;
 					decode[i].execute= execute_bic;
 					decode[i].writeback= writeback_two_operand_1_word;
+					two_operand_descript_1(this, i);
 				}
 				break;
 
 				case 0x5000:
-				// BIS
 					std::printf("\tcase 0x5000 - OK\n" );
 					j =i;
 					for (i =j; i<(j+(1<<12)); i++)
 					{
-						// std::printf("\t\t inside case 0x1000:\n" );
-						// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+						strcat((decode[i].description), "BIS ");
 						two_operand_init_1(this, i);
 						decode[i].fetch= fetch_two_operand_1_word;
 						decode[i].execute= execute_bis;
 						decode[i].writeback= writeback_two_operand_1_word;
+						two_operand_descript_1(this, i);
 					}
 					break;
 
 				case 0x6000:
-				// ADD
 					std::printf("\tcase 0x6000 - OK\n" );
 					j =i;
 					for (i =j; i<(j+(1<<12)); i++)
 					{
-						// std::printf("\t\t inside case 0x1000:\n" );
-						// if (i== 0x1042) std::printf("\tdecode[0x1042] - OK\n" );
+						strcat((decode[i].description), "ADD ");
 						two_operand_init_1(this, i);
 						decode[i].fetch= fetch_two_operand_1_word;
 						decode[i].execute= execute_add;
 						decode[i].writeback= writeback_two_operand_1_word;
+						two_operand_descript_1(this, i);
 					}
 					break;
 
-
+					case 0xe000:
+						std::printf("\tcase 0x6000 - OK\n" );
+						j =i;
+						for (i =j; i<(j+(1<<12)); i++)
+						{
+							strcat((decode[i].description), "SUB ");
+							two_operand_init_1(this, i);
+							decode[i].fetch= fetch_two_operand_1_word;
+							decode[i].execute= execute_sub;
+							decode[i].writeback= writeback_two_operand_1_word;
+							two_operand_descript_1(this, i);
+						}
+						break;
 
 		}
 
