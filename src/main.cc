@@ -7,7 +7,8 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-	char* file = "config/rom.bin";
+	char* rom = "comfig/rom.bin";
+	char* prog = "config/prog.bin";
 
 	Metadata* meta = new Metadata();
 	meta->prog_start = 0x2000; //2^13 = 8192
@@ -17,7 +18,7 @@ int main(int argc, char** argv){
 	meta->io_map = 0xe000; //2^15 + 2^14 + 2^13 = 57344
 	meta->io_map = 0x400; //2**10 = 1024
 
-	Proc* cpu = new Proc(meta, file);
+	Proc* cpu = new Proc(meta, rom, prog);
 
 	Emulator_App emulator(argc, argv, cpu);
 	int ret = emulator.run();

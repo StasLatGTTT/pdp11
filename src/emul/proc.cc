@@ -3,7 +3,7 @@
 #include "proc.h"
 #include "bin_interface.h"
 
-Proc::Proc(Metadata* metadata){
+/*Proc::Proc(Metadata* metadata){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
@@ -15,10 +15,9 @@ Proc::Proc(Metadata* metadata){
 
 	memory->PC = meta->prog_start;
 	memory->SP = meta->stack_root;
-}
+}*/
 
-Proc::Proc(Metadata* metadata, char* prog){
-	rom = "config/rom.bin";
+Proc::Proc(Metadata* metadata, char* rom, char* prog){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];

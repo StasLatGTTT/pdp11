@@ -22,8 +22,8 @@ public:
 	int32_t ticks_seqential, ticks_pipelined;
 	Metadata* meta;
 
-	Proc(Metadata*);
-	Proc(Metadata*, char*);
+	//Proc(Metadata*);
+	Proc(Metadata*, char*, char*);
 	~Proc();
 
 	void step();
