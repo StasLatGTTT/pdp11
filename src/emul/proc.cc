@@ -17,7 +17,8 @@ Proc::Proc(Metadata* metadata){
 	memory->SP = meta->stack_root;
 }
 
-Proc::Proc(Metadata* metadata, char* bin){
+Proc::Proc(Metadata* metadata, char* prog){
+	rom = "config/rom.bin";
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
@@ -31,7 +32,8 @@ Proc::Proc(Metadata* metadata, char* bin){
 	memory->SP = meta->stack_root;
 
 	Bin_interface* loader = new Bin_interface();
-	loader->load_to_memory(memory, bin, &(meta->prog_len), meta->prog_start);
+	loader->load_to_memory(memory, rom, &(meta->rom_len), 0);
+	loader->load_to_memory(memory, prog, &(meta->prog_len), meta->prog_start);
 	delete loader;
 }
 
