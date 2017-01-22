@@ -18,7 +18,7 @@ int execute_add(Interstate* state, Instruction_entry* entry)
   // printf("\nstate->src= %d\n", state->src);
   // printf("state->dst= %d\n", state->dst);
 
-  state->pc= state->pc + state->pc_delta;
+  state->pc= state->pc + state->pc_delta +2;
   state->src= state->src + state->src_delta;
   state->dst= state->dst + state->dst_delta;
 
@@ -67,7 +67,7 @@ int execute_mov(Interstate* state, Instruction_entry* entry)
     int16_t result=0;
     int32_t check_result=0;
 
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
@@ -97,7 +97,7 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
     int32_t check_result=0;
 
     state->dst_val*= -1;
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
@@ -130,7 +130,7 @@ int execute_bit(Interstate* state, Instruction_entry* entry)
     int16_t result=0;
 
     state->dst_val*= -1;
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
@@ -157,7 +157,7 @@ int execute_bic(Interstate* state, Instruction_entry* entry)
     int8_t flags=0;
     int16_t result=0;
 
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
     //D &= ^S
@@ -183,7 +183,7 @@ int execute_bis(Interstate* state, Instruction_entry* entry)
     int8_t flags=0;
     int16_t result=0;
 
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
     result= (state->dst_val)|(state->src_val);
@@ -217,7 +217,8 @@ int execute_addb(Interstate* state, Instruction_entry* entry)
   // printf("\nstate->src= %d\n", state->src);
   // printf("state->dst= %d\n", state->dst);
 
-  state->pc= state->pc + state->pc_delta;
+  state->pc= state->pc + state->pc_delta +1;
+  state->pc+= (state->pc)%2;
   state->src= state->src + state->src_delta;
   state->dst= state->dst + state->dst_delta;
 
@@ -264,7 +265,8 @@ int execute_movb(Interstate* state, Instruction_entry* entry)
     int8_t result=0;
     int16_t check_result=0;
 
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +1;
+    state->pc+= (state->pc)%2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
@@ -294,7 +296,8 @@ int execute_cmpb(Interstate* state, Instruction_entry* entry)
     int16_t check_result=0;
 
     state->dst_val*= -1;
-    state->pc= state->pc + state->pc_delta;
+    state->pc= state->pc + state->pc_delta +1;
+    state->pc+= (state->pc)%2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
@@ -325,12 +328,14 @@ int execute_cmpb(Interstate* state, Instruction_entry* entry)
 //branch conditions
 int execute_br(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
     state->pc+= 2*state->pc_delta;
 
     return 0;
 }
 int execute_bne(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
     if(((state->statword)&(1<<2)) ==0)
     {
         state->pc+= 2*state->pc_delta;
@@ -340,6 +345,7 @@ int execute_bne(Interstate* state, Instruction_entry* entry)
 }
 int execute_beq(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
     if(((state->statword)&(1<<2)) ==1)
     {
         state->pc+= 2*state->pc_delta;
@@ -349,6 +355,8 @@ int execute_beq(Interstate* state, Instruction_entry* entry)
 }
 int execute_bge(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     int c= (state->statword)&(1<<0);
     int v= (state->statword)&(1<<1);
     int z= (state->statword)&(1<<2);
@@ -363,6 +371,8 @@ int execute_bge(Interstate* state, Instruction_entry* entry)
 }
 int execute_blt(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     int c= (state->statword)&(1<<0);
     int v= (state->statword)&(1<<1);
     int z= (state->statword)&(1<<2);
@@ -377,6 +387,8 @@ int execute_blt(Interstate* state, Instruction_entry* entry)
 }
 int execute_bgt(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     int c= (state->statword)&(1<<0);
     int v= (state->statword)&(1<<1);
     int z= (state->statword)&(1<<2);
@@ -391,6 +403,8 @@ int execute_bgt(Interstate* state, Instruction_entry* entry)
 }
 int execute_ble(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     int c= (state->statword)&(1<<0);
     int v= (state->statword)&(1<<1);
     int z= (state->statword)&(1<<2);
@@ -405,6 +419,8 @@ int execute_ble(Interstate* state, Instruction_entry* entry)
 }
 int execute_bpl(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     if(((state->statword)&(1<<3)) ==0)
     {
         state->pc+= 2*state->pc_delta;
@@ -414,6 +430,8 @@ int execute_bpl(Interstate* state, Instruction_entry* entry)
 }
 int execute_bmi(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     if(((state->statword)&(1<<3)) ==1)
     {
         state->pc+= 2*state->pc_delta;
@@ -423,6 +441,8 @@ int execute_bmi(Interstate* state, Instruction_entry* entry)
 }
 int execute_bhi(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     int c= (state->statword)&(1<<0);
     int v= (state->statword)&(1<<1);
     int z= (state->statword)&(1<<2);
@@ -438,6 +458,8 @@ int execute_bhi(Interstate* state, Instruction_entry* entry)
 
 int execute_blos(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     int c= (state->statword)&(1<<0);
     int v= (state->statword)&(1<<1);
     int z= (state->statword)&(1<<2);
@@ -453,6 +475,8 @@ int execute_blos(Interstate* state, Instruction_entry* entry)
 
 int execute_bvc(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     if(((state->statword)&(1<<1)) ==0)
     {
         state->pc+= 2*state->pc_delta;
@@ -462,6 +486,8 @@ int execute_bvc(Interstate* state, Instruction_entry* entry)
 }
 int execute_bvs(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     if(((state->statword)&(1<<1)) ==1)
     {
         state->pc+= 2*state->pc_delta;
@@ -471,6 +497,8 @@ int execute_bvs(Interstate* state, Instruction_entry* entry)
 }
 int execute_bcc(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     if(((state->statword)&(1<<0)) ==0)
     {
         state->pc+= 2*state->pc_delta;
@@ -484,6 +512,8 @@ int execute_bhis(Interstate* state, Instruction_entry* entry)
 }
 int execute_bcs(Interstate* state, Instruction_entry* entry)
 {
+    state->pc+=2;
+
     if(((state->statword)&(1<<0)) ==1)
     {
         state->pc+= 2*state->pc_delta;
