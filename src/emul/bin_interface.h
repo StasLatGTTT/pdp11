@@ -8,8 +8,8 @@
 #include "memory_unit.h"
 
 class Bin_interface {
-	uint32_t size;
-	uint8_t* buffer;
+	int32_t size;
+	int8_t* buffer;
 
 public:
 	Bin_interface();
