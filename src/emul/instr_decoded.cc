@@ -266,120 +266,120 @@ void Instructions::init_all()
 					}
 					break;
 
-			// // branch conditions
-			// 	case 0x0000:
-			// 		// std::printf("\tcase 0x0*** - OK\n" );
-			// 		op4_2= i & 0x0F00;
-			// 		switch (op4_2)
-			// 		{
-			// 			case 0x0100:
-			// 				std::printf("\tcase 0x01** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BR ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_br;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			// 			case 0x0200:
-			// 				std::printf("\tcase 0x02** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BNE ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_bne;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			// 			case 0x0300:
-			// 				std::printf("\tcase 0x03** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BEQ ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_beq;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			// 			case 0x0400:
-			// 				std::printf("\tcase 0x04** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BGE ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_bge;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			// 			case 0x0500:
-			// 				std::printf("\tcase 0x05** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BLT ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_blt;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			// 			case 0x0600:
-			// 				std::printf("\tcase 0x06** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BGT ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_bgt;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			// 			case 0x0700:
-			// 				std::printf("\tcase 0x07** - OK\n" );
-			// 				j =i;
-			// 				for (i =j; i<(j+(1<<8)); i++)
-			// 				{
-			// 					strcat((decode[i].description), "BLE ");
-			// 					conditional_branch_init(this, i);
-			// 					decode[i].fetch= fetch_conditional_branch;
-			// 					decode[i].execute= execute_ble;
-			// 					decode[i].writeback= writeback_conditional_branch;
-			// 					conditional_branch_descript(this, i);
-			// 				}
-			// 				//
-			// 				break;
-			//
-			//
-			// 		}
-			// 		break;
+			// branch conditions
+				case 0x0000:
+					// std::printf("\tcase 0x0*** - OK\n" );
+					op4_2= i & 0x0F00;
+					switch (op4_2)
+					{
+						case 0x0100:
+							std::printf("\tcase 0x01** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BR ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_br;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+						case 0x0200:
+							std::printf("\tcase 0x02** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BNE ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_bne;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+						case 0x0300:
+							std::printf("\tcase 0x03** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BEQ ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_beq;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+						case 0x0400:
+							std::printf("\tcase 0x04** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BGE ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_bge;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+						case 0x0500:
+							std::printf("\tcase 0x05** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BLT ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_blt;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+						case 0x0600:
+							std::printf("\tcase 0x06** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BGT ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_bgt;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+						case 0x0700:
+							std::printf("\tcase 0x07** - OK\n" );
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BLE ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_ble;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i);
+							}
+							//
+							break;
+
+
+					}
+					break;
 
 
 				default:

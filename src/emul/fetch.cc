@@ -505,12 +505,7 @@ int fetch_conditional_branch(Interstate* state, Memory_unit* memory, \
     Instruction_entry* entry)
 {
     state->pc= memory->registers[7];
-    std::printf("\n\nFETCH DONNE 1/3\n\n" );
     state->statword= memory->statword;
-    std::printf("\n\nFETCH DONNE 2/3\n\n" );
     state->pc_delta= (int16_t)entry->offset;
-
-    std::printf("\n\nFETCH DONNE 3/3\n\n" );
-
     return 0;
 }
