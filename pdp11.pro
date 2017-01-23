@@ -1,6 +1,6 @@
 QT += widgets
 
-SOURCES += src/*.cc
+SOURCES += src/main.cc
 SOURCES += src/emul/*.cc
 SOURCES += src/gui/*.cc
 

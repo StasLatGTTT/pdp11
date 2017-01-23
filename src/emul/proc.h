@@ -8,6 +8,7 @@
 #include "instr_decoded.h"
 #include "memory_unit.h"
 #include "instr_entry.h"
+#include "metadata.h"
 
 class Proc{
 	//64-bit
@@ -19,9 +20,10 @@ public:
 	Memory_unit* memory;
 	//32-bit
 	int32_t ticks_seqential, ticks_pipelined;
-	int16_t stack, prog;
+	Metadata* meta;
 
-	Proc(int16_t, int16_t);
+	//Proc(Metadata*);
+	Proc(Metadata*, char*, char*);
 	~Proc();
 
 	void step();

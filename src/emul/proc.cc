@@ -1,6 +1,9 @@
-#include "proc.h"
+#include <cstring>
 
-Proc::Proc(int16_t stack, int16_t prog){
+#include "proc.h"
+#include "bin_interface.h"
+
+/*Proc::Proc(Metadata* metadata){
 	memory = new Memory_unit();
 	state = new Interstate();
 	decode = new Instruction_entry[65536];
@@ -8,8 +11,29 @@ Proc::Proc(int16_t stack, int16_t prog){
 	ticks_seqential = 0;
 	ticks_pipelined = 0;
 
-	this->stack = stack;
-	this->prog = prog;
+	meta = metadata;
+
+	memory->PC = meta->prog_start;
+	memory->SP = meta->stack_root;
+}*/
+
+Proc::Proc(Metadata* metadata, char* rom, char* prog){
+	memory = new Memory_unit();
+	state = new Interstate();
+	decode = new Instruction_entry[65536];
+
+	ticks_seqential = 0;
+	ticks_pipelined = 0;
+
+	meta = metadata;
+
+	memory->PC = meta->prog_start;
+	memory->SP = meta->stack_root;
+
+	Bin_interface* loader = new Bin_interface();
+	loader->load_to_memory(memory, rom, &(meta->rom_len), 0);
+	loader->load_to_memory(memory, prog, &(meta->prog_len), meta->prog_start);
+	delete loader;
 }
 
 Proc::~Proc(){
