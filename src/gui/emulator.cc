@@ -1,6 +1,6 @@
 #include "emulator.h"
-
-#include "ui_testwidget.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 Emulator_App::Emulator_App(int argc, char** argv, Proc* cpu){
 	this->cpu = cpu;
@@ -13,10 +13,9 @@ Emulator_App::~Emulator_App(){
 };
 
 int Emulator_App::run(){
+	
+	/*
 	emul_app = new QApplication(argc, argv);
-
-	//QTextEdit tedit;
-	//tedit.show();
 
 	QWidget *widget = new QWidget;
 	Ui::TestWidget ui;
@@ -25,4 +24,13 @@ int Emulator_App::run(){
 	widget->show();
 
 	return emul_app->exec();
+	*/
+	
+	emul_app = new QApplication(argc, argv);
+    MainWindow w;
+    w.setCPU(this->cpu);
+    w.show();
+
+    return emul_app->exec();
+	
 }

@@ -4,6 +4,7 @@
 
 #include <QApplication>
 #include <QTextEdit>
+#include <QMainWindow>
 
 #include "../emul/proc.h"
 
