@@ -48,14 +48,15 @@ int main(int argc, char** argv){
 	// int16_t instr= 0x124a; // 0x1042
 	// int16_t instr= 0b0000000000000000;
 	// int16_t instr= 0b0110001001001010;//0b0000000000000000;
-	// int16_t instr = 0x000a; // BR 0x0A
-	int16_t instr = 0x800e; // BR 0x0A
+	// int16_t instr = 0x010a; // BR 0x0A
 	// int16_t instr = 0x6042; //ADD R1 R2
+	uint16_t instr = 0x800a; //ADD R1 R2
+
 
 	// cout<< "Hex 0x"<< hex << instr << "= Dec " << dec << instr << endl;
-	printf("table[%x].src= \t%d\n", instr, table->decode[instr].src);
+	printf("table[%x].src=   \t%d\n", instr, table->decode[instr].src);
 	printf("table[%x].mode1= \t%d\n", instr, table->decode[instr].mode1);
-	printf("table[%x].dst= \t%d\n", instr, table->decode[instr].dst);
+	printf("table[%x].dst=   \t%d\n", instr, table->decode[instr].dst);
 	printf("table[%x].mode2= \t%d\n", instr, table->decode[instr].mode2);
 	printf("table[%x].offset= \t%d\n", instr, table->decode[instr].offset);
 	printf("table[%x].descr= \t%s\n", instr, table->decode[instr].description);
