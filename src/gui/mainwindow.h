@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+private:
+    //Метод для настройки интерфейса
+    void createUI(const QStringList &headers);
 };
 
 #endif // MAINWINDOW_H
