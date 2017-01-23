@@ -12,12 +12,14 @@
 int fetch_two_operand_1_word(Interstate*, Memory_unit*, Instruction_entry*);
 int fetch_two_operand_1_byte(Interstate*, Memory_unit*, Instruction_entry*);
 int fetch_conditional_branch(Interstate*, Memory_unit*, Instruction_entry*);
+int fetch_system(Interstate*, Memory_unit*, Instruction_entry*);
 // int fetch_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
 
 //writeback implementations
 int writeback_two_operand_1_word(Interstate*, Memory_unit*, Instruction_entry*);
 int writeback_two_operand_1_byte(Interstate*, Memory_unit*, Instruction_entry*);
 int writeback_conditional_branch(Interstate*, Memory_unit*, Instruction_entry*);
+int writeback_system(Interstate*, Memory_unit*, Instruction_entry*);
 // int writeback_two_operand_2(Interstate*, Memory_unit*, Instruction_entry*);
 
 //two operand executions
@@ -56,3 +58,9 @@ int execute_bcc(Interstate*, Instruction_entry*);
 int execute_bhis(Interstate*, Instruction_entry*);
 int execute_bcs(Interstate*, Instruction_entry*);
 int execute_blo(Interstate*, Instruction_entry*);
+
+//system comands
+int execute_halt(Interstate*, Instruction_entry*);
+int execute_wait(Interstate*, Instruction_entry*);
+int execute_reset(Interstate*, Instruction_entry*);
+int execute_nop(Interstate*, Instruction_entry*);

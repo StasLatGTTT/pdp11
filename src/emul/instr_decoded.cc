@@ -514,10 +514,40 @@ void Instructions::init_all()
 
 
 				default:
-					strcat((decode[i].description), "UNKNOWN ASM ");
+					// define every unknown code as NOP
+					strcat((decode[i].description), "UNDEFINED ASM ");
+					decode[i].fetch= fetch_system;
+					decode[i].execute= execute_nop;
+					decode[i].writeback= writeback_system;
 					break;
 
 		}
 
 	}
+
+	// initialise system comands
+	//HALT
+	i= 0x0000;
+	strcat((decode[i].description), "HALT ");
+	decode[i].fetch= fetch_system;
+	decode[i].execute= execute_halt;
+	decode[i].writeback= writeback_system;
+	//WAIT
+	i= 0x0001;
+	strcat((decode[i].description), "WAIT ");
+	decode[i].fetch= fetch_system;
+	decode[i].execute= execute_wait;
+	decode[i].writeback= writeback_system;
+	//RESET
+	i= 0x0005;
+	strcat((decode[i].description), "RESET ");
+	decode[i].fetch= fetch_system;
+	decode[i].execute= execute_reset;
+	decode[i].writeback= writeback_system;
+	//NOP
+	i= 0x00a0;
+	strcat((decode[i].description), "NOP ");
+	decode[i].fetch= fetch_system;
+	decode[i].execute= execute_nop;
+	decode[i].writeback= writeback_system;
 }

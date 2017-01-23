@@ -72,3 +72,10 @@ int writeback_conditional_branch(Interstate* state, Memory_unit* memory,\
 
     return 0;
 }
+
+int writeback_system(Interstate* state, Memory_unit* memory,\
+   Instruction_entry* entry)
+{
+    memory->registers[7]= state->pc;
+    memory->statword= state->statword;
+}
