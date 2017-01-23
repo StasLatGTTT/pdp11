@@ -37,6 +37,7 @@ void MainWindow::createUI(const QStringList &headers)
         QTableWidgetItem *itmV = new QTableWidgetItem(reg);
         ui->tableWidget->setItem(i, 1 ,itmV);
     }
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QString val = "Value Value Value Value";
     QStringList header1 = val.split(" ");
     ui->tableWidget->setShowGrid(true); // Включаем сетку
@@ -61,6 +62,7 @@ void MainWindow::disasmTable(const QStringList &headers)
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget_2->hideColumn(0);
+    ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 void MainWindow::paintEvent(QPaintEvent *){
