@@ -148,6 +148,7 @@ void conditional_branch_descript(Instructions* i_table, long long unsigned i)
 {
 	char buffer[8];
 	sprintf(buffer, "%d", (i_table->decode[i].offset) );
+	// NO %X !!!
 	strcat((i_table->decode[i].description), "0x");
 	strcat((i_table->decode[i].description), buffer);
 
