@@ -3,6 +3,9 @@
 #include "instr_entry.h"
 #include "instr_implementation.h"
 
+#include <iostream>
+
+
 int writeback_two_operand_1_word(Interstate* state, Memory_unit* memory,\
    Instruction_entry* entry)
 {
@@ -16,16 +19,20 @@ int writeback_two_operand_1_word(Interstate* state, Memory_unit* memory,\
   if (entry->mode2 != 0)
   {
     // memory->ram[state->dst_adr]= state->dst_val;
+    printf("\tmode2!=0\n");
+
     memory->store_word(state->dst_adr, &(state->dst_val));
+    printf("WB: RAM[%d]= %d\n", state->dst_adr, state->dst_val);
+
   }
   else
   {
+    printf("\tmode2==0\n");
     memory->registers[entry->dst] = state->dst_val;
   }
 
-  printf("state->dst= %d\n", state->dst);
-  printf("state->src= %d\n", state->src);
-  // printf("state->dst= %d\n", state->dst);
+  printf("state->dst_val= %d\n", state->dst_val);
+  printf("state->src_val= %d\n", state->src_val);
 
   return 0;
 }

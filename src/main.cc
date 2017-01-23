@@ -37,6 +37,7 @@ int main(int argc, char** argv){
 	// cpu->memory->ram[4]= 100;
 	// cpu->memory->ram[2]= 50;
 	int16_t val;
+	// unsigned val;
 	val =50;
 	cpu->memory->store_word(2, &val);
 	val =100;
@@ -73,10 +74,19 @@ int main(int argc, char** argv){
 	printf("\tResult:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2], cpu->memory->registers[7] );
 
-	 cpu->memory->read_word(2, &val);
-	 printf("RAM[2]= %d\n", val);
-	 cpu->memory->read_word(4, &val);
-	 printf("RAM[4]= %d\n", val);
+	//  cpu->memory->read_word(2, &val);
+	//  printf("RAM[2]= %d\n", val);
+	printf("cpu->state->dst_adr= %d\n",cpu->state->dst_adr);
+	printf("cpu->state->dst_val= %d\n",cpu->state->dst_val);
+	cpu->memory->store_word(cpu->state->dst_adr, &(cpu->state->dst_val));
+	printf("cpu->memory->store_word(cpu->state->dst_adr, &(cpu->state->dst_val));\n");
+	cpu->memory->read_word(cpu->state->dst_adr, &val);
+	printf("cpu->memory->read_word(cpu->state->dst_adr, &val);\n");
+	printf("val= %i\n", val);
+	cout<< bin << val <<endl;
+	cpu->memory->read_word(4, &val);
+	printf("S: RAM[4]= %d\n", val);
+	printf("RAM[%d]= %d\n", cpu->state->dst_adr, cpu->state->dst_val);
 
 	delete cpu;
 	return 0;
