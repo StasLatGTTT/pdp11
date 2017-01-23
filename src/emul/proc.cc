@@ -27,6 +27,13 @@ Proc::Proc(Metadata* metadata, char* rom, char* prog){
 
 	meta = metadata;
 
+	/*
+	int16_t GOD, DEVIL;
+	GOD = 0xBEEF;
+	memory->store_word(0, &GOD);
+	memory->read_word(0, &DEVIL);
+	std::cout<<std::hex<<GOD<<" vs. "<<DEVIL<<std::endl;
+	*/
 	memory->PC = meta->prog_start;
 	memory->SP = meta->stack_root;
 

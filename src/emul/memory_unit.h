@@ -35,4 +35,6 @@ public:
 	//read/write data lines - to endianness respect
 	void read_line(int16_t adr, int16_t len, int8_t* dst);
 	void store_line(int16_t adr, int16_t len, int8_t* src);
+
+	uint16_t swap_bytes(uint16_t);
 };
