@@ -66,8 +66,8 @@ void MainWindow::paintEvent(QPaintEvent *){
     QPainter p;
     p.begin(this);
     p.setPen(QPen(QColor(rand()%16777000)));
-    for (int i=0; i<this->width(); i++)
-            for (int j=0; j<this->height(); j++){
+    for (int i=515; i<=643; i++)
+            for (int j=180; j<= 308; j++){
                 p.drawPoint(i,j); // 360-430 ms
             }
 }
