@@ -13,7 +13,7 @@ Emulator_App::~Emulator_App(){
 };
 
 int Emulator_App::run(){
-	
+
 	/*
 	emul_app = new QApplication(argc, argv);
 
@@ -25,12 +25,11 @@ int Emulator_App::run(){
 
 	return emul_app->exec();
 	*/
-	
+
 	emul_app = new QApplication(argc, argv);
-    MainWindow w;
-    w.setCPU(this->cpu);
+    MainWindow w(cpu);
     w.show();
 
     return emul_app->exec();
-	
+
 }

@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 
 public:
     Proc *cpu;
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(Proc*, QWidget *parent = 0);
     ~MainWindow();
     void setCPU(Proc *cpu);
 

@@ -6,10 +6,11 @@
 #include <string.h>
 #include <iostream>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(Proc* cpu, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    this->cpu = cpu;
     ui->setupUi(this);
     this->createUI(QStringList() << trUtf8("R0") << trUtf8("R0") << trUtf8("R1") << trUtf8("R2") << trUtf8("R3") << trUtf8("R4") << trUtf8("R5") << trUtf8("R6") << trUtf8("R7"));
 }
