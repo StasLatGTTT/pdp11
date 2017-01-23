@@ -47,15 +47,16 @@ int main(int argc, char** argv){
 	printf("Decode table initialised\n");
 	// int16_t instr= 0x124a; // 0x1042
 	// int16_t instr= 0b0000000000000000;
-	int16_t instr= 0b0110001001001010;//0b0000000000000000;
+	// int16_t instr= 0b0110001001001010;//0b0000000000000000;
+	// int16_t instr = 0x010a;
+	int16_t instr = 0x6042;
 
-	cout<< "Hex 0x"<< hex << instr << "= Dec " << dec << instr << endl;
-	printf("table[%d].src= \t%d\n", instr, table->decode[instr].src);
-	printf("table[%d].mode1= \t%d\n", instr, table->decode[instr].mode1);
-	printf("table[%d].dst= \t%d\n", instr, table->decode[instr].dst);
-	printf("table[%d].mode2= \t%d\n", instr, table->decode[instr].mode2);
-	printf("table[%d].descr= \t%s\n", instr, \
-	table->decode[instr].description);
+	// cout<< "Hex 0x"<< hex << instr << "= Dec " << dec << instr << endl;
+	printf("table[%x].src= \t%d\n", instr, table->decode[instr].src);
+	printf("table[%x].mode1= \t%d\n", instr, table->decode[instr].mode1);
+	printf("table[%x].dst= \t%d\n", instr, table->decode[instr].dst);
+	printf("table[%x].mode2= \t%d\n", instr, table->decode[instr].mode2);
+	printf("table[%x].descr= \t%s\n", instr, table->decode[instr].description);
 
 	printf("\tStart:\nR1= %d\nR2= %d\nR7= %d\n", cpu->memory->registers[1],\
 	 cpu->memory->registers[2], cpu->memory->registers[7] );

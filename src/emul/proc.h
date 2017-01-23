@@ -13,7 +13,7 @@ class Proc{
 public:
 	//64-bit
 	Instruction_entry* entry;
-	Instruction_entry* decode;
+	Instructions* instruction;
 	Interstate* state;
 
 	Memory_unit* memory;
