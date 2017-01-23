@@ -24,9 +24,9 @@ int writeback_conditional_branch(Interstate*, Memory_unit*, Instruction_entry*);
 //TODO first two tables from pdp-11 architecture wiki article
 //https://en.wikipedia.org/wiki/PDP-11_architecture
 int execute_add(Interstate*, Instruction_entry*);
-int execute_addb(Interstate*, Instruction_entry*); //bit
+int execute_addb(Interstate*, Instruction_entry*); //bit // DOES NOT EXIST
 int execute_sub(Interstate*, Instruction_entry*);
-int execute_subb(Interstate*, Instruction_entry*); //bit
+int execute_subb(Interstate*, Instruction_entry*); //bit // DOES NOT EXIST
 int execute_mov(Interstate*, Instruction_entry*);
 int execute_movb(Interstate*, Instruction_entry*); //bit
 int execute_cmp(Interstate*, Instruction_entry*);

@@ -30,6 +30,11 @@ void two_operand_init_1(Instructions* i_table, long long unsigned i)
 
 }
 
+void conditional_branch_init(Instructions* i_table, long long unsigned i)
+{
+	i_table->decode[i].offset= 	(i & 0x00FF)>>0;// 0 000. 000 0. 1111. 1111
+}
+
 void two_operand_descript_1(Instructions* i_table, long long unsigned i)
 {
 	char buffer[12];
@@ -139,12 +144,18 @@ void two_operand_descript_1(Instructions* i_table, long long unsigned i)
 
 }
 
+void conditional_branch_descript(Instructions* i_table, long long unsigned i)
+{
+	strcat((i_table->decode[i].description), "offset");
+}
+
 void Instructions::init_all()
 {
 	std::printf("\tvoid Instructions::init_all() - OK\n" );
 	long long unsigned i=0, j=0;
 	int8_t bw=0, op=0;
 	int16_t op4 =0;
+	int16_t op4_2 =0;
 	int8_t mode_src, mode_dst, res_src, res_dst;
 
 	for (i=0; i<(1<<16); i++)
@@ -152,6 +163,7 @@ void Instructions::init_all()
 		op4= i & 0xF000;
 		switch (op4)
 		{
+		// two operand instructions
 			case 0x1000:
 				std::printf("\tcase 0x1000 - OK\n" );
 				j =i;
@@ -236,19 +248,64 @@ void Instructions::init_all()
 					}
 					break;
 
-					case 0xe000:
-						std::printf("\tcase 0x6000 - OK\n" );
-						j =i;
-						for (i =j; i<(j+(1<<12)); i++)
-						{
-							strcat((decode[i].description), "SUB ");
-							two_operand_init_1(this, i);
-							decode[i].fetch= fetch_two_operand_1_word;
-							decode[i].execute= execute_sub;
-							decode[i].writeback= writeback_two_operand_1_word;
-							two_operand_descript_1(this, i);
-						}
-						break;
+				case 0xe000:
+					std::printf("\tcase 0x6000 - OK\n" );
+					j =i;
+					for (i =j; i<(j+(1<<12)); i++)
+					{
+						strcat((decode[i].description), "SUB ");
+						two_operand_init_1(this, i);
+						decode[i].fetch= fetch_two_operand_1_word;
+						decode[i].execute= execute_sub;
+						decode[i].writeback= writeback_two_operand_1_word;
+						two_operand_descript_1(this, i);
+					}
+					break;
+
+			// branch conditions
+				case 0x0000:
+					std::printf("\tcase 0x0000 - OK\n" );
+					op4_2= i & 0x0F00;
+					switch (op4_2)
+					{
+						case 1:
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BR ");
+								conditional_branch_init(this, i);
+								decode[i].fetch= fetch_conditional_branch;
+								decode[i].execute= execute_br;
+								decode[i].writeback= writeback_conditional_branch;
+								conditional_branch_descript(this, i)
+							}
+							//
+							break;
+
+						case 2:
+							j =i;
+							for (i =j; i<(j+(1<<8)); i++)
+							{
+								strcat((decode[i].description), "BNE ");
+							}
+							//
+							break;
+
+						// case 0:
+						// 	j =i;
+						// 	for (i =j; i<(j+(1<<8)); i++)
+						// 	{
+						// 		//
+						// 	}
+						// 	//
+						// 	break;
+
+					}
+					break;
+
+				default:
+					strcat((decode[i].description), "UNKNOWN ASM ");
+					break;
 
 		}
 
