@@ -7,8 +7,8 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-	char* rom = "comfig/rom.bin";
-	char* prog = "config/prog.bin";
+	char rom[32] = "config/rom.bin";
+	char prog[32] = "config/program.bin";
 
 	Metadata* meta = new Metadata();
 	meta->prog_start = 0x2000; //2^13 = 8192
