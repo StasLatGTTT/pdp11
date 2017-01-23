@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "emulator.h"
+//#include "../emul/metadata.h"
 #include "../emul/memory_unit.h"
 #include "ui_mainwindow.h"
 #include <stdio.h>
@@ -65,10 +66,22 @@ void MainWindow::disasmTable(const QStringList &headers)
 void MainWindow::paintEvent(QPaintEvent *){
     QPainter p;
     p.begin(this);
-    p.setPen(QPen(QColor(rand()%16777000)));
-    for (int i=515; i<=643; i++)
-            for (int j=180; j<= 308; j++){
-                p.drawPoint(i,j); // 360-430 ms
+    
+    int8_t *color = new int8_t[4096];
+    for (int i = 0; i < 4096; i++)
+        color[i] = 0;
+    	
+    cpu->memory->read_line(cpu->meta->vram_map, cpu->meta->vram_len, color);
+
+
+    for (int i=0; i<=64; i++)
+            for (int j=0; j<= 64; j++){
+            	//p.setPen(QPen(QColor(rand()%16777000)));
+                p.setPen(QPen(QColor(color[i*64 + j])));
+                p.drawPoint(2*i + 515,2*j + 180); // 360-430 ms
+                p.drawPoint(2*i + 515,2*j+1 + 180);
+                p.drawPoint(2*i+1 + 515,2*j + 180);
+                p.drawPoint(2*i+1 + 515,2*j+1 + 180);
             }
 }
 
