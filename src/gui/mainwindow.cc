@@ -13,6 +13,7 @@ MainWindow::MainWindow(Proc* cpu, QWidget *parent) :
     this->cpu = cpu;
     ui->setupUi(this);
     this->createUI(QStringList() << trUtf8("R0") << trUtf8("R0") << trUtf8("R1") << trUtf8("R2") << trUtf8("R3") << trUtf8("R4") << trUtf8("R5") << trUtf8("R6") << trUtf8("R7"));
+    this->disasmTable(QStringList() << trUtf8("BP") << trUtf8("Address") << trUtf8("Disasm"));
 }
 
 MainWindow::~MainWindow()
@@ -23,8 +24,6 @@ MainWindow::~MainWindow()
 void MainWindow::setCPU(Proc *cpu)
 {
     this->cpu = cpu;
-
-
 }
 
 void MainWindow::createUI(const QStringList &headers)
@@ -54,7 +53,17 @@ void MainWindow::createUI(const QStringList &headers)
     ui->tableWidget->hideRow(0);
 }
 
+void MainWindow::disasmTable(const QStringList &headers)
+{
+    ui->tableWidget_2->setColumnCount(3); // Указываем число колонок
+    ui->tableWidget_2->setRowCount(13);
+    ui->tableWidget_2->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_2->hideColumn(0);
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     ui->label->setText("Registers");
+
 }

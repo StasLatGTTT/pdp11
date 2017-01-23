@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>469</height>
+    <height>554</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>171</width>
+      <width>201</width>
       <height>27</height>
      </rect>
     </property>
@@ -30,14 +30,14 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>80</x>
       <y>120</y>
       <width>67</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>Registers</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -45,12 +45,12 @@
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>171</width>
+      <width>201</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Start || Stop</string>
+     <string>Restsrt</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -58,12 +58,12 @@
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>171</width>
+      <width>201</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Start || Stop</string>
+     <string>Step</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="tableWidget">
@@ -71,9 +71,32 @@
      <rect>
       <x>10</x>
       <y>150</y>
-      <width>171</width>
-      <height>241</height>
+      <width>201</width>
+      <height>271</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>40</y>
+      <width>251</width>
+      <height>431</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>0</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disassemler</string>
     </property>
    </widget>
   </widget>

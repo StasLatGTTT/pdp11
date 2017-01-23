@@ -30,6 +30,8 @@ private:
 private:
     //Метод для настройки интерфейса
     void createUI(const QStringList &headers);
+    // Дизассембла с чекбоксами
+    void disasmTable(const QStringList &headers);
 };
 
 #endif // MAINWINDOW_H
