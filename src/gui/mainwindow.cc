@@ -29,12 +29,14 @@ void MainWindow::createUI(const QStringList &headers)
 {
     ui->tableWidget->setColumnCount(2); // Указываем число колонок
     ui->tableWidget->setRowCount(9);
-    char reg[8];
-    sprintf(reg, "%d", cpu->memory->registers[0]);
-    QTableWidgetItem *itmV = new QTableWidgetItem(reg);
+    for(int i = 1; i < 9; i++) {
+        char reg[8];
+        sprintf(reg, "%d", cpu->memory->registers[i-1]);
+        QTableWidgetItem *itmV = new QTableWidgetItem(reg);
+        ui->tableWidget->setItem(i, 1 ,itmV);
+    }
     QString val = "Value Value Value Value";
     QStringList header1 = val.split(" ");
-    ui->tableWidget->setItem(1, 1 ,itmV);
     ui->tableWidget->setShowGrid(true); // Включаем сетку
     // Разрешаем выделение только одного элемента
     ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
