@@ -31,8 +31,8 @@ void MainWindow::createUI(const QStringList &headers)
     ui->tableWidget->setColumnCount(2); // Указываем число колонок
     ui->tableWidget->setRowCount(9);
     for(int i = 1; i < 9; i++) {
-        char reg[8];
-        sprintf(reg, "%x", cpu->memory->registers[i-1]);
+        char reg[6];
+        sprintf(reg, "%x", (uint16_t)cpu->memory->registers[i-1]);
         QTableWidgetItem *itmV = new QTableWidgetItem(reg);
         ui->tableWidget->setItem(i, 1 ,itmV);
     }
