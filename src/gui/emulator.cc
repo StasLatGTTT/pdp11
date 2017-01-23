@@ -28,6 +28,7 @@ int Emulator_App::run(){
 	
 	emul_app = new QApplication(argc, argv);
     MainWindow w;
+    w.setCPU(this->cpu);
     w.show();
 
     return emul_app->exec();

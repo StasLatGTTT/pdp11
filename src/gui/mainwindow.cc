@@ -1,5 +1,9 @@
 #include "mainwindow.h"
+#include "emulator.h"
+#include "../emul/memory_unit.h"
 #include "ui_mainwindow.h"
+#include <stdio.h>
+#include <string.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,14 +18,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setCPU(Proc *cpu)
+{
+    this->cpu = cpu;
+
+
+}
+
 void MainWindow::createUI(const QStringList &headers)
 {
     ui->tableWidget->setColumnCount(2); // Указываем число колонок
     ui->tableWidget->setRowCount(9);
-    //QTableWidgetItem *itmV = new QTableWidgetItem("Value");
+    char reg[8];
+    sprintf(reg, "%d", cpu->memory->registers[0]);
+    QTableWidgetItem *itmV = new QTableWidgetItem(reg);
     QString val = "Value Value Value Value";
     QStringList header1 = val.split(" ");
-    //ui->tableWidget->setItem(1, 1 ,itmV);
+    ui->tableWidget->setItem(1, 1 ,itmV);
     ui->tableWidget->setShowGrid(true); // Включаем сетку
     // Разрешаем выделение только одного элемента
     ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
