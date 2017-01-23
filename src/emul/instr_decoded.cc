@@ -147,7 +147,7 @@ void two_operand_descript_1(Instructions* i_table, long long unsigned i)
 void conditional_branch_descript(Instructions* i_table, long long unsigned i)
 {
 	char buffer[8];
-	sprintf(buffer, "%x", (i_table->decode[i].offset) );
+	sprintf(buffer, "%d", (i_table->decode[i].src) );
 	strcat((i_table->decode[i].description), "0x");
 	strcat((i_table->decode[i].description), buffer);
 
@@ -266,12 +266,12 @@ void Instructions::init_all()
 					}
 					break;
 
-			// branch conditions part 1
-			case 0x0000:
-				// std::printf("\tcase 0x0*** - OK\n" );
-				op4_2= i & 0x0F00;
-				switch (op4_2)
-				{
+			// branch conditions
+				case 0x0000:
+					// std::printf("\tcase 0x0*** - OK\n" );
+					op4_2= i & 0x0F00;
+					switch (op4_2)
+					{
 						case 0x0100:
 							std::printf("\tcase 0x01** - OK\n" );
 							j =i;
@@ -376,51 +376,17 @@ void Instructions::init_all()
 							}
 							//
 							break;
-				}
-
-				break;
 
 
-			// // branch conditions part 2
-				// case 0x8000:
-				// 	op4_2= i & 0x0F00;
-				// 	switch (op4_2)
-				// 	{
-				// 		case 0x0000:
-				// 			std::printf("\tcase 0x80** - OK\n" );
-				// 			j =i;
-				// 			for (i =j; i<(j+(1<<8)); i++)
-				// 			{
-				// 				strcat((decode[i].description), "BPL ");
-				// 				conditional_branch_init(this, i);
-				// 				decode[i].fetch= fetch_conditional_branch;
-				// 				decode[i].execute= execute_bpl;
-				// 				decode[i].writeback= writeback_conditional_branch;
-				// 				conditional_branch_descript(this, i);
-				// 			}
-				// 			break;
-				//
-				// 		case 0x0100:
-				// 			std::printf("\tcase 0x81** - OK\n" );
-				// 			j =i;
-				// 			for (i =j; i<(j+(1<<8)); i++)
-				// 			{
-				// 				strcat((decode[i].description), "BMI ");
-				// 				conditional_branch_init(this, i);
-				// 				decode[i].fetch= fetch_conditional_branch;
-				// 				decode[i].execute= execute_bmi;
-				// 				decode[i].writeback= writeback_conditional_branch;
-				// 				conditional_branch_descript(this, i);
-				// 			}
-				// 			break;
-				// 	}
+					}
+					break;
+					
 
-			// default:
-				// strcat((decode[i].description), "UNKNOWN ASM ");
-				// break;
+				default:
+					strcat((decode[i].description), "UNKNOWN ASM ");
+					break;
 
 		}
 
 	}
-std::printf("\n -- ALL INIT ENDED WITH NO MISTAKES -- \n\n" );
 }
