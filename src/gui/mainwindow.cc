@@ -62,6 +62,16 @@ void MainWindow::disasmTable(const QStringList &headers)
     ui->tableWidget_2->hideColumn(0);
 }
 
+void MainWindow::paintEvent(QPaintEvent *){
+    QPainter p;
+    p.begin(this);
+    p.setPen(QPen(QColor(rand()%16777000)));
+    for (int i=0; i<this->width(); i++)
+            for (int j=0; j<this->height(); j++){
+                p.drawPoint(i,j); // 360-430 ms
+            }
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     ui->label->setText("Registers");

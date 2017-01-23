@@ -5,7 +5,8 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QString>
-
+#include <QPainter>
+#include <QBitmap>
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,10 @@ private:
     void createUI(const QStringList &headers);
     // Дизассембла с чекбоксами
     void disasmTable(const QStringList &headers);
+
+protected:
+    void paintEvent(QPaintEvent *);
+
 };
 
 #endif // MAINWINDOW_H
