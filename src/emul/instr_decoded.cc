@@ -8,6 +8,7 @@
 Instructions::Instructions()
 {
 	decode = new Instruction_entry[65536];
+	init_all();
 }
 
 Instructions::~Instructions()
@@ -25,7 +26,7 @@ void two_operand_init_1(Instructions* i_table, long long unsigned i)
 	i_table->decode[i].src=		(i & 0x01c0)>>6;// 0 000. 000 1.11 00.0 000
 	i_table->decode[i].mode1=	(i & 0x0e00)>>9;// 0 000. 111 0.00 00.0 000
 
-	//  std::printf("decode[%llu]\n", i);
+	//  //std::printf("decode[%llu]\n", i);
 	// std::cout<< "decode[ " << std::hex << i << " ]" <<std::endl;
 
 }
@@ -156,7 +157,7 @@ void conditional_branch_descript(Instructions* i_table, long long unsigned i)
 
 void Instructions::init_all()
 {
-	// std::printf("\tvoid Instructions::init_all() - OK\n" );
+	// //std::printf("\tvoid Instructions::init_all() - OK\n" );
 	long long unsigned i=0, j=0;
 	uint8_t bw=0, op=0;
 	uint16_t op4 =0;
@@ -170,7 +171,7 @@ void Instructions::init_all()
 		{
 		// two operand instructions
 			case 0x1000:
-				std::printf("\tcase 0x1*** - OK\n" );
+				////std::printf("\tcase 0x1*** - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
@@ -184,7 +185,7 @@ void Instructions::init_all()
 				break;
 
 			case 0x2000:
-				std::printf("\tcase 0x2*** - OK\n" );
+				////std::printf("\tcase 0x2*** - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
@@ -198,7 +199,7 @@ void Instructions::init_all()
 				break;
 
 			case 0x3000:
-				std::printf("\tcase 0x3*** - OK\n" );
+				////std::printf("\tcase 0x3*** - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
@@ -212,7 +213,7 @@ void Instructions::init_all()
 				break;
 
 			case 0x4000:
-				std::printf("\tcase 0x4*** - OK\n" );
+				//std::printf("\tcase 0x4*** - OK\n" );
 				j =i;
 				for (i =j; i<(j+(1<<12)); i++)
 				{
@@ -226,7 +227,7 @@ void Instructions::init_all()
 				break;
 
 			case 0x5000:
-					std::printf("\tcase 0x5*** - OK\n" );
+					//std::printf("\tcase 0x5*** - OK\n" );
 					j =i;
 					for (i =j; i<(j+(1<<12)); i++)
 					{
@@ -240,7 +241,7 @@ void Instructions::init_all()
 					break;
 
 			case 0x6000:
-					std::printf("\tcase 0x6*** - OK\n" );
+					//std::printf("\tcase 0x6*** - OK\n" );
 					j =i;
 					for (i =j; i<(j+(1<<12)); i++)
 					{
@@ -254,7 +255,7 @@ void Instructions::init_all()
 					break;
 
 			case 0xE000:
-					std::printf("\tcase 0xE*** - OK\n" );
+					//std::printf("\tcase 0xE*** - OK\n" );
 					j =i;
 					for (i =j; i<(j+(1<<12)); i++)
 					{
@@ -269,12 +270,12 @@ void Instructions::init_all()
 
 			// branch conditions
 			case 0x0000:
-					// std::printf("\tcase 0x0*** - OK\n" );
+					// //std::printf("\tcase 0x0*** - OK\n" );
 					op4_2= i & 0x0F00;
 					switch (op4_2)
 					{
 						case 0x0100:
-							std::printf("\tcase 0x01** - OK\n" );
+							//std::printf("\tcase 0x01** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -289,7 +290,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0200:
-							std::printf("\tcase 0x02** - OK\n" );
+							//std::printf("\tcase 0x02** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -304,7 +305,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0300:
-							std::printf("\tcase 0x03** - OK\n" );
+							//std::printf("\tcase 0x03** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -319,7 +320,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0400:
-							std::printf("\tcase 0x04** - OK\n" );
+							//std::printf("\tcase 0x04** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -334,7 +335,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0500:
-							std::printf("\tcase 0x05** - OK\n" );
+							//std::printf("\tcase 0x05** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -349,7 +350,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0600:
-							std::printf("\tcase 0x06** - OK\n" );
+							//std::printf("\tcase 0x06** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -364,7 +365,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0700:
-							std::printf("\tcase 0x07** - OK\n" );
+							//std::printf("\tcase 0x07** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -384,12 +385,12 @@ void Instructions::init_all()
 
 			// branch conditions
 			case 0x8000:
-					// std::printf("\tcase 0x0*** - OK\n" );
+					// //std::printf("\tcase 0x0*** - OK\n" );
 					op4_2= i & 0x0F00;
 					switch (op4_2)
 					{
 						case 0x0000:
-							std::printf("\tcase 0x80** - OK\n" );
+							//std::printf("\tcase 0x80** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -404,7 +405,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0100:
-							std::printf("\tcase 0x81** - OK\n" );
+							//std::printf("\tcase 0x81** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -419,7 +420,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0200:
-							std::printf("\tcase 0x82** - OK\n" );
+							//std::printf("\tcase 0x82** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -434,7 +435,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0300:
-							std::printf("\tcase 0x83** - OK\n" );
+							//std::printf("\tcase 0x83** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -449,7 +450,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0400:
-							std::printf("\tcase 0x84** - OK\n" );
+							//std::printf("\tcase 0x84** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -464,7 +465,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0500:
-							std::printf("\tcase 0x85** - OK\n" );
+							//std::printf("\tcase 0x85** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -479,7 +480,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0600:
-							std::printf("\tcase 0x86** - OK\n" );
+							//std::printf("\tcase 0x86** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
@@ -494,7 +495,7 @@ void Instructions::init_all()
 							break;
 
 						case 0x0700:
-							std::printf("\tcase 0x87** - OK\n" );
+							//std::printf("\tcase 0x87** - OK\n" );
 							j =i;
 							for (i =j; i<(j+(1<<8)); i++)
 							{
