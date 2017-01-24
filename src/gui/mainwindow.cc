@@ -147,25 +147,33 @@ void MainWindow::on_pushButton_3_clicked()
         QTableWidgetItem *itmV = new QTableWidgetItem(reg);
         ui->tableWidget->setItem(i, 1 ,itmV);
     }
-    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //QString val = "Value Value Value Value";
-    //QStringList header1 = val.split(" ");
-    ui->tableWidget->setShowGrid(true); // Включаем сетку
-    // Разрешаем выделение только одного элемента
-    //ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-    // Разрешаем выделение построчно
-    //ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-    // Устанавливаем заголовки колонок
-    //ui->tableWidget->setHorizontalHeaderLabels(header1);
-    //ui->tableWidget->setVerticalHeaderLabels(headers);
-    // Растягиваем последнюю колонку на всё доступное пространство
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-    // Скрываем колонку под номером 0
-    ui->tableWidget->hideColumn(0);
-    ui->tableWidget->hideRow(0);
 
+    int8_t word[4];
+    for (int i = 0; i < 4; i++) {
+        word[i] = (cpu->memory->statword >> (3-i))&0x01;
+        char w[4];
+        sprintf(w, "%d", (int8_t)word[i]);
+        QTableWidgetItem *itmV = new QTableWidgetItem(w);
+        ui->tableWidget_3->setItem(0, i+1 ,itmV);
+    }
 
-    //this->update();
-    //this->disasmTable(QStringList() << trUtf8("BP") << trUtf8("Address") << trUtf8("Disasm"));
+    int len = (uint16_t)cpu->meta->prog_len;
+    uint16_t instr;
+    for(int i=0; i<len/2; i++){
+        len = cpu->meta->prog_len;
+        uint8_t* prog = new uint8_t[len];
+        char *desc = new char[64];
+        cpu->memory->read_line(cpu->meta->prog_start, len, prog);
+        //instr = cpu->memory->swap_bytes(*((uint16_t*) prog));
+        instr = *((uint16_t*) (prog + i * 2));
+        desc = cpu->instruction->decode[instr].description;
+        QTableWidgetItem *itmV = new QTableWidgetItem(desc);
+        ui->tableWidget_2->setItem(i, 2 ,itmV);
+
+        char addr[6];
+        sprintf(addr, "%x", cpu->meta->prog_start + 2*i);
+        QTableWidgetItem *itmVad = new QTableWidgetItem(addr);
+        ui->tableWidget_2->setItem(i, 1 ,itmVad);
+    }
 
 }
