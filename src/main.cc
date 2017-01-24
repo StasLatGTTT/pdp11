@@ -20,34 +20,6 @@ int main(int argc, char** argv){
 
 	Proc* cpu = new Proc(meta, rom, prog);
 
-	// uint16_t instr = 0x010a;
-	// uint16_t instr = 0x0001;
-	uint16_t var, instr = 0x0001;
-	instr = 0x01ff;
-	// int8_t d= -2;
-	// printf("TEST 1= %x, %d\n", d, d);
-	// var= (int16_t)d;
-	// printf("TEST 2= %x, %d\n", var, var);
-	// d= 0;
-	// d= (int8_t)(var & 0x00FF);
-	// var&= 0x00FF;
-	// var&= 0x00FF;
-	// printf("TEST 3= %x, %d\n", var, var);
-	// d= (int8_t) var;
-	// printf("TEST 4= %x, %d\n", d, d);
-	// instr= (instr)<<8;
-	// uint16_t instr = 0x6042;
-	// uint16_t instr= 0xffff;
-	cpu->memory->store_word(0x0000, &instr);
-
-	cpu->memory->registers[7]=0;
-	// printf("Step is to be passed\n" );
-	printf("PC= %d\n", cpu->memory->registers[7]);
-	cpu->step();
-	// printf("Step passed\n" );
-	printf("PC= %d\n", cpu->memory->registers[7]);
-
-
 	Emulator_App emulator(argc, argv, cpu);
 	int ret = emulator.run();
 
