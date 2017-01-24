@@ -17,7 +17,7 @@ int main(int argc, char** argv){
 	meta->vram_len = 0x1000; //2^12 = 4096
 	meta->io_map = 0xe000; //2^15 + 2^14 + 2^13 = 57344
 	meta->io_map = 0x400; //2**10 = 1024
-	meta->io_write_protected = 0x1fff;//8191
+	meta->io_write_protected = 0x2000;//8191
 
 	Proc* cpu = new Proc(meta, rom, prog);
 
