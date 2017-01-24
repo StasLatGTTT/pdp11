@@ -30,6 +30,7 @@ void MainWindow::setCPU(Proc *cpu)
 
 void MainWindow::createUI(const QStringList &headers)
 {
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setColumnCount(2); // Указываем число колонок
     ui->tableWidget->setRowCount(9);
     for(int i = 1; i < 9; i++) {
@@ -57,6 +58,7 @@ void MainWindow::createUI(const QStringList &headers)
 
 void MainWindow::disasmTable(const QStringList &headers)
 {
+    ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_2->setColumnCount(3); // Указываем число колонок
     ui->tableWidget_2->setRowCount(13);
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
@@ -66,10 +68,12 @@ void MainWindow::disasmTable(const QStringList &headers)
 
 void MainWindow::setStatword(const QStringList &headers)
 {
+    ui->tableWidget_3->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_3->setColumnCount(5); // Указываем число колонок
     ui->tableWidget_3->setRowCount(1);
     ui->tableWidget_3->setHorizontalHeaderLabels(headers);
     ui->tableWidget_3->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_3->verticalHeader()->setStretchLastSection(true);
     ui->tableWidget_3->hideColumn(0);
     //QTableWidgetItem *itmV = new QTableWidgetItem("0");
     int8_t word[4];
@@ -79,6 +83,7 @@ void MainWindow::setStatword(const QStringList &headers)
         sprintf(w, "%d", (int8_t)word[i]);
         QTableWidgetItem *itmV = new QTableWidgetItem(w);
         ui->tableWidget_3->setItem(0, i+1 ,itmV);
+        ui->tableWidget_3->setColumnWidth(i, 40);
     }
 
 }
@@ -109,4 +114,9 @@ void MainWindow::on_pushButton_clicked()
 {
     ui->label->setText("Registers");
 
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    cpu->step();
 }
