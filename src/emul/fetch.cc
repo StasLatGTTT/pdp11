@@ -48,7 +48,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       //  Auto-increment
       adr= memory->registers[src];
       // val= memory->ram[adr];
-      memory->read_word(adr, &val);
+      memory->read_word(adr+2, &val);
       state->src_delta= 2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
@@ -157,6 +157,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       //  Auto-increment
       adr= memory->registers[dst];
       // val= memory->ram[adr];
+    //   adr+=2;
       memory->read_word(adr, &val);
       state->dst_delta= 2;
       //(memory->registers[n_reg])+= 2;
