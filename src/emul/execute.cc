@@ -67,8 +67,9 @@ int execute_mov(Interstate* state, Instruction_entry* entry)
     uint16_t result=0;
     int32_t check_result=0;
 
-    state->pc= state->pc + state->pc_delta +2;
-    state->src= state->src + state->src_delta;
+    state->pc= state->pc + state->pc_delta +2 ;
+    state->src= state->src + state->src_delta+2;
+    // if (state->src==7) state->pc= state->pc +2;
     state->dst= state->dst + state->dst_delta;
 
     result= state->src_val;
@@ -528,7 +529,7 @@ int execute_blo(Interstate* state, Instruction_entry* entry)
 int execute_halt(Interstate* state, Instruction_entry* entry)
 {
     state->pc+= 2;
-    state->statword |= 0b11100000; 
+    state->statword |= 0b11100000;
     return 0;
 }
 int execute_wait(Interstate* state, Instruction_entry* entry)
