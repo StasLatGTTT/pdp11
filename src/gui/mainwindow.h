@@ -4,6 +4,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QAbstractScrollArea>
 #include <QString>
 #include <QPainter>
 #include <QBitmap>
@@ -21,6 +22,7 @@ public:
     explicit MainWindow(Proc*, QWidget *parent = 0);
     ~MainWindow();
     void setCPU(Proc *cpu);
+    void paintEvent(QPaintEvent *);
 
 private slots:
     void on_pushButton_clicked();
@@ -37,8 +39,6 @@ private:
     void disasmTable(const QStringList &headers);
     void setStatword(const QStringList &headers);
 
-protected:
-    void paintEvent(QPaintEvent *);
 
 };
 

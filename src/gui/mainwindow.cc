@@ -4,8 +4,11 @@
 #include "../emul/memory_unit.h"
 #include "ui_mainwindow.h"
 #include <stdio.h>
+#include <iostream>
 #include <string.h>
 #include <iostream>
+
+using namespace std;
 
 MainWindow::MainWindow(Proc* cpu, QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +16,7 @@ MainWindow::MainWindow(Proc* cpu, QWidget *parent) :
 {
     this->cpu = cpu;
     ui->setupUi(this);
+    //this->paintEvent(QPaintEvent);
     this->createUI(QStringList() << trUtf8("R0") << trUtf8("R0") << trUtf8("R1") << trUtf8("R2") << trUtf8("R3") << trUtf8("R4") << trUtf8("R5") << trUtf8("R6") << trUtf8("R7"));
     this->disasmTable(QStringList() << trUtf8("BP") << trUtf8("Address") << trUtf8("Disasm"));
     this->setStatword(QStringList() << trUtf8("N") << trUtf8("N") << trUtf8("Z") << trUtf8("O") << trUtf8("C"));
@@ -66,7 +70,7 @@ void MainWindow::disasmTable(const QStringList &headers)
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
     //ui->tableWidget_2->hideColumn(0);
-    ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_2->setColumnWidth(0, 30);
 
     for(int i=0; i<len/2; i++){
@@ -99,6 +103,7 @@ void MainWindow::setStatword(const QStringList &headers)
     //QTableWidgetItem *itmV = new QTableWidgetItem("0");
     int8_t word[4];
     for (int i = 0; i < 4; i++) {
+        ui->tableWidget_3->setColumnWidth(i, 40);
         word[i] = (cpu->memory->statword >> (3-i))&0x01;
         char w[4];
         sprintf(w, "%d", (int8_t)word[i]);
@@ -111,12 +116,13 @@ void MainWindow::setStatword(const QStringList &headers)
 void MainWindow::paintEvent(QPaintEvent *){
     QPainter p;
     p.begin(this);
+    //cout << this;
 
     uint8_t *color = new uint8_t[4096];
     for (int i = 0; i < 4096; i++)
-        color[i] = 0;
+        color[i] = 0xff;
 
-    cpu->memory->read_line(cpu->meta->vram_map, cpu->meta->vram_len, color);
+    //cpu->memory->read_line(cpu->meta->vram_map, cpu->meta->vram_len, color);
 
 
     for (int i=0; i<=64; i++)
@@ -129,6 +135,7 @@ void MainWindow::paintEvent(QPaintEvent *){
                 p.drawPoint(2*i+1 + 515,2*j+1 + 180);
             }
 }
+
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -189,8 +196,9 @@ void MainWindow::on_pushButton_3_clicked()
     }
 
 
-    /*QPainter p;
-    p.begin(this);
+    QPainter p1;
+
+    p1.begin(this);
 
     uint8_t *color = new uint8_t[4096];
     for (int i = 0; i < 4096; i++)
@@ -202,11 +210,12 @@ void MainWindow::on_pushButton_3_clicked()
     for (int i=0; i<=64; i++)
             for (int j=0; j<= 64; j++){
                 //p.setPen(QPen(QColor(rand()%16777000)));
-                p.setPen(QPen(QColor(color[i*64 + j])));
-                p.drawPoint(2*i + 515,2*j + 180); // 360-430 ms
-                p.drawPoint(2*i + 515,2*j+1 + 180);
-                p.drawPoint(2*i+1 + 515,2*j + 180);
-                p.drawPoint(2*i+1 + 515,2*j+1 + 180);
-        }*/
+                p1.setPen(QPen(QColor(color[i*64 + j])));
+                p1.drawPoint(2*i + 515,2*j + 180); // 360-430 ms
+                p1.drawPoint(2*i + 515,2*j+1 + 180);
+                p1.drawPoint(2*i+1 + 515,2*j + 180);
+                p1.drawPoint(2*i+1 + 515,2*j+1 + 180);
+        }
+
 
 }
