@@ -50,6 +50,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       // val= memory->ram[adr];
       memory->read_word(adr+2, &val);
       state->src_delta= 2;
+      if (src == 7) state->src_delta +=2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
       //sp+=2
