@@ -70,7 +70,7 @@ void MainWindow::disasmTable(const QStringList &headers)
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
     //ui->tableWidget_2->hideColumn(0);
-    //ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_2->setColumnWidth(0, 30);
 
     for(int i=0; i<len/2; i++){
@@ -129,10 +129,10 @@ void MainWindow::paintEvent(QPaintEvent *){
             for (int j=0; j<= 64; j++){
             	//p.setPen(QPen(QColor(rand()%16777000)));
                 p.setPen(QPen(QColor(color[i*64 + j])));
-                p.drawPoint(2*i + 515,2*j + 180); // 360-430 ms
-                p.drawPoint(2*i + 515,2*j+1 + 180);
-                p.drawPoint(2*i+1 + 515,2*j + 180);
-                p.drawPoint(2*i+1 + 515,2*j+1 + 180);
+                p.drawPoint(2*i + 585,2*j + 180); // 360-430 ms
+                p.drawPoint(2*i + 585,2*j+1 + 180);
+                p.drawPoint(2*i+1 + 585,2*j + 180);
+                p.drawPoint(2*i+1 + 585,2*j+1 + 180);
             }
 }
 
@@ -211,10 +211,10 @@ void MainWindow::on_pushButton_3_clicked()
             for (int j=0; j<= 64; j++){
                 //p.setPen(QPen(QColor(rand()%16777000)));
                 p1.setPen(QPen(QColor(color[i*64 + j])));
-                p1.drawPoint(2*i + 515,2*j + 180); // 360-430 ms
-                p1.drawPoint(2*i + 515,2*j+1 + 180);
-                p1.drawPoint(2*i+1 + 515,2*j + 180);
-                p1.drawPoint(2*i+1 + 515,2*j+1 + 180);
+                p1.drawPoint(2*i + 565,2*j + 180); // 360-430 ms
+                p1.drawPoint(2*i + 565,2*j+1 + 180);
+                p1.drawPoint(2*i+1 + 565,2*j + 180);
+                p1.drawPoint(2*i+1 + 565,2*j+1 + 180);
         }
 
 
