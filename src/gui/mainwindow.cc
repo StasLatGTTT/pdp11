@@ -57,13 +57,28 @@ void MainWindow::createUI(const QStringList &headers)
 
 void MainWindow::disasmTable(const QStringList &headers)
 {
+    //int len = (uint16_t)cpu->meta->prog_len;
+    int len = 20;
     ui->tableWidget_2->setColumnCount(3); // Указываем число колонок
-    ui->tableWidget_2->setRowCount(13);
+    ui->tableWidget_2->setRowCount(len);
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
     //ui->tableWidget_2->hideColumn(0);
     ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_2->setColumnWidth(0, 30);
+
+    //int len = cpu->meta->prog_len;
+    char *desc = new char[64];
+    desc = cpu->instruction->decode[0x6042].description;
+    QTableWidgetItem *itmV = new QTableWidgetItem(desc);
+    ui->tableWidget_2->setItem(0, 2 ,itmV);
+
+    char addr[6];
+    sprintf(addr, "%x", cpu->meta->prog_start);
+    QTableWidgetItem *itmVad = new QTableWidgetItem(addr);
+    ui->tableWidget_2->setItem(0, 1 ,itmVad);
+
+
 }
 
 void MainWindow::paintEvent(QPaintEvent *){
