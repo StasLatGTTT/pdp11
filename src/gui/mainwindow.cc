@@ -177,7 +177,7 @@ void MainWindow::on_pushButton_3_clicked()
     }
 
 
-    QPainter p;
+    /*QPainter p;
     p.begin(this);
 
     uint8_t *color = new uint8_t[4096];
@@ -195,6 +195,6 @@ void MainWindow::on_pushButton_3_clicked()
                 p.drawPoint(2*i + 515,2*j+1 + 180);
                 p.drawPoint(2*i+1 + 515,2*j + 180);
                 p.drawPoint(2*i+1 + 515,2*j+1 + 180);
-            }
+        }*/
 
 }
