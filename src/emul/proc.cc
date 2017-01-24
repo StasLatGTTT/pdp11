@@ -1,7 +1,11 @@
 #include <cstring>
+#include <iostream>
+
 
 #include "proc.h"
 #include "bin_interface.h"
+
+using namespace std;
 
 /*Proc::Proc(Metadata* metadata){
 	memory = new Memory_unit();
@@ -54,8 +58,14 @@ void Proc::step(){
 	uint16_t instr;
 	memory->read_word(state->pc, &instr);
 	entry = &(instruction->decode[instr]);
+	printf("Entry[%x] inited\n", instr );
 
 	entry->fetch(state, memory, entry);
+	// printf(" -- fetch\n" );
 	entry->execute(state, entry);
+	// printf(" -- execute\n" );
 	entry->writeback(state, memory, entry);
+	// printf(" -- writeback\n" );
+	printf("ASM:\t%s\n", entry->description);
+
 }

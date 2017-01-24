@@ -125,7 +125,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
 
   state->src_val= val;
   state->src_adr= adr;
-  printf("src_reg= %d, %d, %d\n", src, adr, val);
+  // printf("src_reg= %d, %d, %d\n", src, adr, val);
   ///////////////////////////////////////////////////////////
 
   val=0;
@@ -240,7 +240,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
 
   state->dst_val= val;
   state->dst_adr= adr;
-  printf("dst_reg= %d, %d, %d\n", dst, adr, val);
+  // printf("dst_reg= %d, %d, %d\n", dst, adr, val);
 
   return 0;
 }
@@ -374,7 +374,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
 
   state->src_val= val;
   state->src_adr= adr;
-  printf("src_reg= %d, %d, %d\n", src, adr, val);
+  // printf("src_reg= %d, %d, %d\n", src, adr, val);
   ///////////////////////////////////////////////////////////
 
   val=0;
@@ -497,7 +497,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
 
   state->dst_val= val;
   state->dst_adr= adr;
-  printf("dst_reg= %d, %d, %d\n", dst, adr, val);
+  // printf("dst_reg= %d, %d, %d\n", dst, adr, val);
 
   return 0;
 }

@@ -9,7 +9,7 @@
 struct Instruction_entry{
 	char description[64];
 	uint8_t opcode;
-	uint8_t offset;
+	int8_t offset; //critical fix
 	uint8_t mode1;
 	uint8_t mode2;
 	uint8_t src;

@@ -33,7 +33,7 @@ void two_operand_init_1(Instructions* i_table, long long unsigned i)
 
 void conditional_branch_init(Instructions* i_table, long long unsigned i)
 {
-	i_table->decode[i].offset= 	(i & 0x00FF)>>0;// 0 000. 000 0. 1111. 1111
+	i_table->decode[i].offset= 	(int8_t)(i & 0x00FF)>>0;// 0 000. 000 0. 1111. 1111
 }
 
 void two_operand_descript_1(Instructions* i_table, long long unsigned i)
