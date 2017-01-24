@@ -132,7 +132,19 @@ void MainWindow::paintEvent(QPaintEvent *){
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->label->setText("Registers");
+    int stop = 0;
+    while(stop == 0) {
+        uint16_t *ad = new uint16_t;
+        uint16_t *halt = new uint16_t (0x0000);
+        cpu->memory->read_word(cpu->memory->registers[7], ad);
+        if (ad == halt) {
+            stop = 1;
+            break;
+        }
+
+        on_pushButton_3_clicked();
+
+    }
 
 }
 
