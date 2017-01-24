@@ -527,8 +527,8 @@ int execute_blo(Interstate* state, Instruction_entry* entry)
 // system comands
 int execute_halt(Interstate* state, Instruction_entry* entry)
 {
-    // state->pc+= 2;
-    // TODO HALT
+    state->pc+= 2;
+    state->statword |= 0b11100000; 
     return 0;
 }
 int execute_wait(Interstate* state, Instruction_entry* entry)
@@ -538,7 +538,7 @@ int execute_wait(Interstate* state, Instruction_entry* entry)
 }
 int execute_reset(Interstate* state, Instruction_entry* entry)
 {
-    state->pc+= 2;
+    state->pc= 0;
     // TODO RESET
     return 0;
 }
