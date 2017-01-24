@@ -9,4 +9,5 @@ struct Metadata{
 	uint16_t vram_len;
 	uint16_t io_map;
 	uint16_t io_len;
+	uint16_t write_protected;
 };

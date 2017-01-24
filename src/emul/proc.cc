@@ -40,6 +40,7 @@ Proc::Proc(Metadata* metadata, char* rom, char* prog){
 	*/
 	memory->PC = meta->prog_start;
 	memory->SP = meta->stack_root;
+	memory->write_protected = meta->write_protected;
 
 	Bin_interface* loader = new Bin_interface();
 	loader->load_to_memory(memory, rom, &(meta->rom_len), 0);

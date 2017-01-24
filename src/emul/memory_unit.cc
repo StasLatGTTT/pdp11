@@ -17,6 +17,7 @@ int32_t Memory_unit::read_word(uint16_t adr, uint16_t* dst){
 }
 
 int32_t Memory_unit::store_word(uint16_t adr, uint16_t* src){
+	if (adr < write_protected) return -1;
 	uint16_t hi = ((uint16_t)(*src)) / 256, lo = ((uint16_t)(*src)) % 256;
 	ram[adr + 1] = (uint8_t) hi;
 	ram[adr] = (uint8_t) lo;

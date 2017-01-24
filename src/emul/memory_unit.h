@@ -21,6 +21,7 @@ class Memory_unit{
 	uint8_t* ram;
 public:
 	uint16_t registers[8];
+	uint16_t write_protected;
 	uint8_t statword;
 
 	Memory_unit();
