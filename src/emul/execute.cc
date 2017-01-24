@@ -511,7 +511,7 @@ int execute_bhis(Interstate* state, Instruction_entry* entry)
 int execute_bcs(Interstate* state, Instruction_entry* entry)
 {
     state->pc+=2;
-
+    
     if(((state->statword)&(1<<0)) ==1)
     {
         state->pc+= 2*state->pc_delta;
