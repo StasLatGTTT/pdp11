@@ -59,6 +59,7 @@ void MainWindow::disasmTable(const QStringList &headers)
 {
     //int len = (uint16_t)cpu->meta->prog_len;
     int len = 20;
+    uint16_t instr;
     ui->tableWidget_2->setColumnCount(3); // Указываем число колонок
     ui->tableWidget_2->setRowCount(len);
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
@@ -67,9 +68,13 @@ void MainWindow::disasmTable(const QStringList &headers)
     ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_2->setColumnWidth(0, 30);
 
-    //int len = cpu->meta->prog_len;
+    len = cpu->meta->prog_len;
+    uint8_t* prog = new uint8_t[len];
     char *desc = new char[64];
-    desc = cpu->instruction->decode[0x6042].description;
+    cpu->memory->read_line(cpu->meta->prog_start, len, prog);
+    //instr = cpu->memory->swap_bytes(*((uint16_t*) prog));
+    instr = *((uint16_t*) (prog + 2 * 2));
+    desc = cpu->instruction->decode[instr].description;
     QTableWidgetItem *itmV = new QTableWidgetItem(desc);
     ui->tableWidget_2->setItem(0, 2 ,itmV);
 
