@@ -104,6 +104,7 @@ void MainWindow::setStatword(const QStringList &headers)
         sprintf(w, "%d", (int8_t)word[i]);
         QTableWidgetItem *itmV = new QTableWidgetItem(w);
         ui->tableWidget_3->setItem(0, i+1 ,itmV);
+        ui->tableWidget_3->setColumnWidth(i, 40);
     }
 
 }
