@@ -97,14 +97,14 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
     uint16_t result=0;
     int32_t check_result=0;
 
-    state->dst_val*= -1;
+    // state->dst_val*= -1;
     state->pc= state->pc + state->pc_delta +2;
     // state->src= state->src + state->src_delta;
     // state->dst= state->dst + state->dst_delta;
 
-    result= state->src_val + state->dst_val;
-    check_result= state->src_val + state->dst_val;
-    state->dst_val*= -1;
+    result= state->src_val - state->dst_val;
+    check_result= state->src_val - state->dst_val;
+    // state->dst_val*= -1;
 
     if ((1<<16)& check_result)
     {
@@ -114,7 +114,7 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
     {
         flags+= 2;
     }
-    if (result == 0)
+    if (check_result == 0)
     {
         flags+= 4;
     }
@@ -122,7 +122,8 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
     {
         flags+= 8;
     }
-    state->statword= state->statword | flags;
+    // state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
