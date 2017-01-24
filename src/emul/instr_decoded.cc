@@ -270,7 +270,7 @@ void Instructions::init_all()
 
 			// branch conditions
 			case 0x0000:
-					// //std::printf("\tcase 0x0*** - OK\n" );
+					//std::printf("\tcase 0x0*** - OK\n" );
 					op4_2= i & 0x0F00;
 					switch (op4_2)
 					{
@@ -385,7 +385,7 @@ void Instructions::init_all()
 
 			// branch conditions
 			case 0x8000:
-					// //std::printf("\tcase 0x0*** - OK\n" );
+					//std::printf("\tcase 0x0*** - OK\n" );
 					op4_2= i & 0x0F00;
 					switch (op4_2)
 					{
