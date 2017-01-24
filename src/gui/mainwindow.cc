@@ -61,8 +61,9 @@ void MainWindow::disasmTable(const QStringList &headers)
     ui->tableWidget_2->setRowCount(13);
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget_2->hideColumn(0);
+    //ui->tableWidget_2->hideColumn(0);
     ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget_2->setColumnWidth(0, 30);
 }
 
 void MainWindow::paintEvent(QPaintEvent *){
