@@ -37,6 +37,7 @@ void MainWindow::createUI(const QStringList &headers)
         QTableWidgetItem *itmV = new QTableWidgetItem(reg);
         ui->tableWidget->setItem(i, 1 ,itmV);
     }
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QString val = "Value Value Value Value";
     QStringList header1 = val.split(" ");
     ui->tableWidget->setShowGrid(true); // Включаем сетку
@@ -56,11 +57,35 @@ void MainWindow::createUI(const QStringList &headers)
 
 void MainWindow::disasmTable(const QStringList &headers)
 {
+    int len = (uint16_t)cpu->meta->prog_len;
+    //int len = 20;
+    uint16_t instr;
     ui->tableWidget_2->setColumnCount(3); // Указываем число колонок
-    ui->tableWidget_2->setRowCount(13);
+    ui->tableWidget_2->setRowCount(len/2);
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget_2->hideColumn(0);
+    //ui->tableWidget_2->hideColumn(0);
+    ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget_2->setColumnWidth(0, 30);
+
+    for(int i=0; i<len/2; i++){
+        len = cpu->meta->prog_len;
+        uint8_t* prog = new uint8_t[len];
+        char *desc = new char[64];
+        cpu->memory->read_line(cpu->meta->prog_start, len, prog);
+        //instr = cpu->memory->swap_bytes(*((uint16_t*) prog));
+        instr = *((uint16_t*) (prog + i * 2));
+        desc = cpu->instruction->decode[instr].description;
+        QTableWidgetItem *itmV = new QTableWidgetItem(desc);
+        ui->tableWidget_2->setItem(i, 2 ,itmV);
+
+        char addr[6];
+        sprintf(addr, "%x", cpu->meta->prog_start + 2*i);
+        QTableWidgetItem *itmVad = new QTableWidgetItem(addr);
+        ui->tableWidget_2->setItem(i, 1 ,itmVad);
+    }
+
+
 }
 
 void MainWindow::paintEvent(QPaintEvent *){
@@ -88,5 +113,39 @@ void MainWindow::paintEvent(QPaintEvent *){
 void MainWindow::on_pushButton_clicked()
 {
     ui->label->setText("Registers");
+
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    cpu->step();
+    ui->tableWidget->setColumnCount(2); // Указываем число колонок
+    ui->tableWidget->setRowCount(9);
+    for(int i = 1; i < 9; i++) {
+        char reg[6];
+        sprintf(reg, "%x", (uint16_t)cpu->memory->registers[i-1]);
+        QTableWidgetItem *itmV = new QTableWidgetItem(reg);
+        ui->tableWidget->setItem(i, 1 ,itmV);
+    }
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //QString val = "Value Value Value Value";
+    //QStringList header1 = val.split(" ");
+    ui->tableWidget->setShowGrid(true); // Включаем сетку
+    // Разрешаем выделение только одного элемента
+    //ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    // Разрешаем выделение построчно
+    //ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    // Устанавливаем заголовки колонок
+    //ui->tableWidget->setHorizontalHeaderLabels(header1);
+    //ui->tableWidget->setVerticalHeaderLabels(headers);
+    // Растягиваем последнюю колонку на всё доступное пространство
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    // Скрываем колонку под номером 0
+    ui->tableWidget->hideColumn(0);
+    ui->tableWidget->hideRow(0);
+
+
+    //this->update();
+    //this->disasmTable(QStringList() << trUtf8("BP") << trUtf8("Address") << trUtf8("Disasm"));
 
 }
