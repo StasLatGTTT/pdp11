@@ -176,4 +176,25 @@ void MainWindow::on_pushButton_3_clicked()
         ui->tableWidget_2->setItem(i, 1 ,itmVad);
     }
 
+
+    QPainter p;
+    p.begin(this);
+
+    uint8_t *color = new uint8_t[4096];
+    for (int i = 0; i < 4096; i++)
+        color[i] = 0;
+
+    cpu->memory->read_line(cpu->meta->vram_map, cpu->meta->vram_len, color);
+
+
+    for (int i=0; i<=64; i++)
+            for (int j=0; j<= 64; j++){
+                //p.setPen(QPen(QColor(rand()%16777000)));
+                p.setPen(QPen(QColor(color[i*64 + j])));
+                p.drawPoint(2*i + 515,2*j + 180); // 360-430 ms
+                p.drawPoint(2*i + 515,2*j+1 + 180);
+                p.drawPoint(2*i+1 + 515,2*j + 180);
+                p.drawPoint(2*i+1 + 515,2*j+1 + 180);
+            }
+
 }
