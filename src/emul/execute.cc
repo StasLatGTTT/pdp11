@@ -7,12 +7,12 @@
 // word-operations
 int execute_add(Interstate* state, Instruction_entry* entry)
 {
-  int8_t flags=0;
+  uint8_t flags=0;
   //1- Carry
   //2- Overflow
   //4- Zero
   //8- Negative
-  int16_t result=0;
+  uint16_t result=0;
   int32_t check_result=0;
 
   // printf("\nstate->src= %d\n", state->src);
@@ -59,12 +59,12 @@ int execute_sub(Interstate* state, Instruction_entry* entry)
 }
 int execute_mov(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
+    uint8_t flags=0;
     //1- Carry
     //2- Overflow
     //4- Zero
     //8- Negative
-    int16_t result=0;
+    uint16_t result=0;
     int32_t check_result=0;
 
     state->pc= state->pc + state->pc_delta +2;
@@ -92,8 +92,8 @@ int execute_mov(Interstate* state, Instruction_entry* entry)
 }
 int execute_cmp(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
-    int16_t result=0;
+    uint8_t flags=0;
+    uint16_t result=0;
     int32_t check_result=0;
 
     state->dst_val*= -1;
@@ -126,8 +126,8 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
 }
 int execute_bit(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
-    int16_t result=0;
+    uint8_t flags=0;
+    uint16_t result=0;
 
     state->dst_val*= -1;
     state->pc= state->pc + state->pc_delta +2;
@@ -154,8 +154,8 @@ int execute_bit(Interstate* state, Instruction_entry* entry)
 }
 int execute_bic(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
-    int16_t result=0;
+    uint8_t flags=0;
+    uint16_t result=0;
 
     state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
@@ -180,8 +180,8 @@ int execute_bic(Interstate* state, Instruction_entry* entry)
 }
 int execute_bis(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
-    int16_t result=0;
+    uint8_t flags=0;
+    uint16_t result=0;
 
     state->pc= state->pc + state->pc_delta +2;
     state->src= state->src + state->src_delta;
@@ -206,13 +206,13 @@ int execute_bis(Interstate* state, Instruction_entry* entry)
 // bit-operations
 int execute_addb(Interstate* state, Instruction_entry* entry)
 {
-  int8_t flags=0;
+  uint8_t flags=0;
   //1- Carry
   //2- Overflow
   //4- Zero
   //8- Negative
-  int8_t result=0;
-  int16_t check_result=0;
+  uint8_t result=0;
+  uint16_t check_result=0;
 
   // printf("\nstate->src= %d\n", state->src);
   // printf("state->dst= %d\n", state->dst);
@@ -242,8 +242,8 @@ int execute_addb(Interstate* state, Instruction_entry* entry)
       flags+= 8;
   }
 
-  // hi= (int8_t)((state->dst_val)>>8)
-  state->dst_val= (int16_t)result;
+  // hi= (uint8_t)((state->dst_val)>>8)
+  state->dst_val= (uint16_t)result;
   state->statword= state->statword | flags;
 
   return 0;
@@ -257,20 +257,20 @@ int execute_subb(Interstate* state, Instruction_entry* entry)
 }
 int execute_movb(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
+    uint8_t flags=0;
     //1- Carry
     //2- Overflow
     //4- Zero
     //8- Negative
-    int8_t result=0;
-    int16_t check_result=0;
+    uint8_t result=0;
+    uint16_t check_result=0;
 
     state->pc= state->pc + state->pc_delta +1;
     state->pc+= (state->pc)%2;
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
-    result= (int8_t)state->src_val;
+    result= (uint8_t)state->src_val;
 
     //No Carru-flag for this operation
     //Overflow-flag =0 for this operation
@@ -284,16 +284,16 @@ int execute_movb(Interstate* state, Instruction_entry* entry)
         flags+= 8;
     }
 
-    state->dst_val= (int16_t)result;
+    state->dst_val= (uint16_t)result;
     state->statword= state->statword | flags;
 
     return 0;
 }
 int execute_cmpb(Interstate* state, Instruction_entry* entry)
 {
-    int8_t flags=0;
-    int8_t result=0;
-    int16_t check_result=0;
+    uint8_t flags=0;
+    uint8_t result=0;
+    uint16_t check_result=0;
 
     state->dst_val*= -1;
     state->pc= state->pc + state->pc_delta +1;
@@ -301,7 +301,7 @@ int execute_cmpb(Interstate* state, Instruction_entry* entry)
     state->src= state->src + state->src_delta;
     state->dst= state->dst + state->dst_delta;
 
-    result= (int8_t)state->src_val + (int8_t)state->dst_val;
+    result= (uint8_t)state->src_val + (uint8_t)state->dst_val;
     check_result= state->src_val + state->dst_val;
 
     if ((1<<8)& check_result)
@@ -511,7 +511,7 @@ int execute_bhis(Interstate* state, Instruction_entry* entry)
 int execute_bcs(Interstate* state, Instruction_entry* entry)
 {
     state->pc+=2;
-    
+
     if(((state->statword)&(1<<0)) ==1)
     {
         state->pc+= 2*state->pc_delta;

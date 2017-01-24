@@ -40,8 +40,8 @@ int writeback_two_operand_1_word(Interstate* state, Memory_unit* memory,\
 int writeback_two_operand_1_byte(Interstate* state, Memory_unit* memory,\
    Instruction_entry* entry)
 {
-    int8_t tmp_val =0;
-    tmp_val= (int8_t)(state->dst_val);
+    uint8_t tmp_val =0;
+    tmp_val= (uint8_t)(state->dst_val);
 
     memory->registers[7]= state->pc;
     memory->registers[entry->src]= state->src;

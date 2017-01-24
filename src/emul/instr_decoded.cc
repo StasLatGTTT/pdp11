@@ -158,10 +158,10 @@ void Instructions::init_all()
 {
 	// std::printf("\tvoid Instructions::init_all() - OK\n" );
 	long long unsigned i=0, j=0;
-	int8_t bw=0, op=0;
+	uint8_t bw=0, op=0;
 	uint16_t op4 =0;
 	uint16_t op4_2 =0;
-	int8_t mode_src, mode_dst, res_src, res_dst;
+	uint8_t mode_src, mode_dst, res_src, res_dst;
 
 	for (i=0; i<(1<<16); i++)
 	{

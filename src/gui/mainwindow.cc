@@ -66,11 +66,11 @@ void MainWindow::disasmTable(const QStringList &headers)
 void MainWindow::paintEvent(QPaintEvent *){
     QPainter p;
     p.begin(this);
-    
-    int8_t *color = new int8_t[4096];
+
+    uint8_t *color = new uint8_t[4096];
     for (int i = 0; i < 4096; i++)
         color[i] = 0;
-    	
+
     cpu->memory->read_line(cpu->meta->vram_map, cpu->meta->vram_len, color);
 
 

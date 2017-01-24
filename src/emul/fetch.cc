@@ -7,10 +7,10 @@
 int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
     Instruction_entry* entry)
 {
-  int16_t val=0;
-  int16_t pc=0;
-  int16_t adr=0;
-  int16_t nn=0;//index
+  uint16_t val=0;
+  uint16_t pc=0;
+  uint16_t adr=0;
+  uint16_t nn=0;//index
   int32_t fake=0;
 
   //copy state
@@ -24,8 +24,8 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
   state->src_delta= 0;
   state->dst_delta= 0;
 
-  int8_t src= entry->src;
-  int8_t dst= entry->dst;
+  uint8_t src= entry->src;
+  uint8_t dst= entry->dst;
 
 
   //src
@@ -247,11 +247,11 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
 int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
     Instruction_entry* entry)
 {
-  int8_t val=0;
-  int8_t tmp_adr=0;
-  int8_t nn=0;//index
-  int16_t pc=0;
-  int16_t adr=0;
+  uint8_t val=0;
+  uint8_t tmp_adr=0;
+  uint8_t nn=0;//index
+  uint16_t pc=0;
+  uint16_t adr=0;
   int32_t fake=0;
 
   //copy state
@@ -265,8 +265,8 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
   state->src_delta= 0;
   state->dst_delta= 0;
 
-  int8_t src= entry->src;
-  int8_t dst= entry->dst;
+  uint8_t src= entry->src;
+  uint8_t dst= entry->dst;
 
 
   //src
@@ -307,7 +307,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       //allways +=2
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t)tmp_adr;
+      adr= (uint16_t)tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -333,7 +333,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       adr= memory->registers[src] -2;
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t)tmp_adr;
+      adr= (uint16_t)tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -348,7 +348,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       adr= memory->registers[src];
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t)(tmp_adr + nn);
+      adr= (uint16_t)(tmp_adr + nn);
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -363,10 +363,10 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       adr= memory->registers[src];
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t)(tmp_adr + nn);
+      adr= (uint16_t)(tmp_adr + nn);
       // adr= memory->ram[adr+nn];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t) tmp_adr;
+      adr= (uint16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -424,7 +424,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       //allways +=2
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t) tmp_adr;
+      adr= (uint16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -450,7 +450,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       adr= memory->registers[dst] -2;
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t) tmp_adr;
+      adr= (uint16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -468,7 +468,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       adr= memory->registers[dst];
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t) (tmp_adr + nn);
+      adr= (uint16_t) (tmp_adr + nn);
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -486,10 +486,10 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       adr= memory->registers[dst];
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t) (tmp_adr + nn);
+      adr= (uint16_t) (tmp_adr + nn);
       // adr= memory->ram[adr+nn];
       memory->read_byte(adr, &tmp_adr);
-      adr= (int16_t) tmp_adr;
+      adr= (uint16_t) tmp_adr;
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       break;
@@ -506,7 +506,7 @@ int fetch_conditional_branch(Interstate* state, Memory_unit* memory, \
 {
     state->pc= memory->registers[7];
     state->statword= memory->statword;
-    state->pc_delta= (int16_t)entry->offset;
+    state->pc_delta= (uint16_t)entry->offset;
     return 0;
 }
 
@@ -515,6 +515,6 @@ int fetch_conditional_branch(Interstate* state, Memory_unit* memory, \
 {
     state->pc= memory->registers[7];
     state->statword= memory->statword;
-    
+
     return 0;
 }

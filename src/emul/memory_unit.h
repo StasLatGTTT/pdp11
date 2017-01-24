@@ -18,23 +18,23 @@
 #define PC registers[0x07]
 
 class Memory_unit{
-	int8_t* ram;
+	uint8_t* ram;
 public:
-	int16_t registers[8];
-	int8_t statword;
+	uint16_t registers[8];
+	uint8_t statword;
 
 	Memory_unit();
 	~Memory_unit();
 
 	//read/write data from ram with respect to endianness
-	int32_t read_word(int16_t adr, int16_t* dst);
-	int32_t store_word(int16_t adr, int16_t* src);
-	int32_t read_byte(int16_t adr, int8_t* dst);
-	int32_t store_byte(int16_t adr, int8_t* src);
+	int32_t read_word(uint16_t adr, uint16_t* dst);
+	int32_t store_word(uint16_t adr, uint16_t* src);
+	int32_t read_byte(uint16_t adr, uint8_t* dst);
+	int32_t store_byte(uint16_t adr, uint8_t* src);
 
 	//read/write data lines - to endianness respect
-	void read_line(int16_t adr, int16_t len, int8_t* dst);
-	void store_line(int16_t adr, int16_t len, int8_t* src);
+	void read_line(uint16_t adr, uint16_t len, uint8_t* dst);
+	void store_line(uint16_t adr, uint16_t len, uint8_t* src);
 
 	uint16_t swap_bytes(uint16_t);
 };

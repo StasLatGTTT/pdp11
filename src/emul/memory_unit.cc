@@ -3,41 +3,41 @@
 #include "memory_unit.h"
 
 Memory_unit::Memory_unit(){
-	ram = new int8_t[65536];
+	ram = new uint8_t[65536];
 }
 
 Memory_unit::~Memory_unit(){
 	delete ram;
 }
 
-int32_t Memory_unit::read_word(int16_t adr, int16_t* dst){
-	int16_t hi = (int16_t) ram[adr + 1], lo = (int16_t) ram[adr];
+int32_t Memory_unit::read_word(uint16_t adr, uint16_t* dst){
+	uint16_t hi = (uint16_t) ram[adr + 1], lo = (uint16_t) ram[adr];
 	*dst = (hi << 8) + (0x00FF & lo);
 	return -1;
 }
 
-int32_t Memory_unit::store_word(int16_t adr, int16_t* src){
-	int16_t hi = ((uint16_t)(*src)) / 256, lo = ((uint16_t)(*src)) % 256;
-	ram[adr + 1] = (int8_t) hi;
-	ram[adr] = (int8_t) lo;
+int32_t Memory_unit::store_word(uint16_t adr, uint16_t* src){
+	uint16_t hi = ((uint16_t)(*src)) / 256, lo = ((uint16_t)(*src)) % 256;
+	ram[adr + 1] = (uint8_t) hi;
+	ram[adr] = (uint8_t) lo;
 	return -1;
 }
 
-int32_t Memory_unit::read_byte(int16_t adr, int8_t* dst){
+int32_t Memory_unit::read_byte(uint16_t adr, uint8_t* dst){
 	*dst = ram[adr];
 	return -1;
 }
 
-int32_t Memory_unit::store_byte(int16_t adr, int8_t* src){
+int32_t Memory_unit::store_byte(uint16_t adr, uint8_t* src){
 	ram[adr] = *src;
 	return -1;
 }
 
-void Memory_unit::read_line(int16_t adr, int16_t len, int8_t* dst){
+void Memory_unit::read_line(uint16_t adr, uint16_t len, uint8_t* dst){
 	memcpy(dst, &ram[adr], len);
 }
 
-void Memory_unit::store_line(int16_t adr, int16_t len, int8_t* src){
+void Memory_unit::store_line(uint16_t adr, uint16_t len, uint8_t* src){
 	memcpy(&ram[adr], src, len);
 }
 

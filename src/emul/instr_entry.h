@@ -8,12 +8,12 @@
 
 struct Instruction_entry{
 	char description[64];
-	int8_t opcode;
-	int8_t offset;
-	int8_t mode1;
-	int8_t mode2;
-	int8_t src;
-	int8_t dst;
+	uint8_t opcode;
+	uint8_t offset;
+	uint8_t mode1;
+	uint8_t mode2;
+	uint8_t src;
+	uint8_t dst;
 
 	int32_t (*fetch)(Interstate*, Memory_unit*, Instruction_entry*);
 	int32_t (*execute)(Interstate*, Instruction_entry*);

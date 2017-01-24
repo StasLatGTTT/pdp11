@@ -5,7 +5,7 @@
 
 Bin_interface::Bin_interface(){
 	size = 256;
-	buffer = new int8_t[size];
+	buffer = new uint8_t[size];
 }
 
 Bin_interface::~Bin_interface(){
@@ -14,7 +14,7 @@ Bin_interface::~Bin_interface(){
 
 void Bin_interface::load_to_memory(Memory_unit* memory, char* filename, \
 uint16_t* len, uint16_t adr) {
-	int16_t num_read = 0;
+	uint16_t num_read = 0;
 	FILE* fd = fopen(filename, "r");
 	do{
 		num_read = fread(buffer, 1, size, fd);

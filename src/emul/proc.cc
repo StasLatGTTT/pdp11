@@ -51,7 +51,7 @@ Proc::~Proc(){
 
 void Proc::step(){
 	state->pc = memory->registers[7];
-	int16_t instr;
+	uint16_t instr;
 	memory->read_word(state->pc, &instr);
 	entry = &(instruction->decode[instr]);
 
