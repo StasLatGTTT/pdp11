@@ -18,5 +18,5 @@ public:
 	void init_all();
 
 private:
-	void init_add();
+	void init_add(long long unsigned i);
 };

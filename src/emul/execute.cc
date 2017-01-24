@@ -455,7 +455,6 @@ int execute_bhi(Interstate* state, Instruction_entry* entry)
 
     return 0;
 }
-
 int execute_blos(Interstate* state, Instruction_entry* entry)
 {
     state->pc+=2;
@@ -472,7 +471,6 @@ int execute_blos(Interstate* state, Instruction_entry* entry)
 
     return 0;
 }
-
 int execute_bvc(Interstate* state, Instruction_entry* entry)
 {
     state->pc+=2;
@@ -524,4 +522,28 @@ int execute_bcs(Interstate* state, Instruction_entry* entry)
 int execute_blo(Interstate* state, Instruction_entry* entry)
 {
     return execute_bcs(state, entry);
+}
+
+// system comands
+int execute_halt(Interstate* state, Instruction_entry* entry)
+{
+    // state->pc+= 2;
+    // TODO HALT
+    return 0;
+}
+int execute_wait(Interstate* state, Instruction_entry* entry)
+{
+    state->pc+= 0;
+    return 0;
+}
+int execute_reset(Interstate* state, Instruction_entry* entry)
+{
+    state->pc+= 2;
+    // TODO RESET
+    return 0;
+}
+int execute_nop(Interstate* state, Instruction_entry* entry)
+{
+    state->pc+= 2;
+    return 0;
 }

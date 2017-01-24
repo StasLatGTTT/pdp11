@@ -20,7 +20,7 @@
 Proc::Proc(Metadata* metadata, char* rom, char* prog){
 	memory = new Memory_unit();
 	state = new Interstate();
-	decode = new Instruction_entry[65536];
+	instruction = new Instructions();
 
 	ticks_seqential = 0;
 	ticks_pipelined = 0;
@@ -46,14 +46,14 @@ Proc::Proc(Metadata* metadata, char* rom, char* prog){
 Proc::~Proc(){
 	delete memory;
 	delete state;
-	delete[] decode;
+	delete instruction;
 }
 
 void Proc::step(){
 	state->pc = memory->registers[7];
 	int16_t instr;
 	memory->read_word(state->pc, &instr);
-	entry = &(decode[instr]);
+	entry = &(instruction->decode[instr]);
 
 	entry->fetch(state, memory, entry);
 	entry->execute(state, entry);

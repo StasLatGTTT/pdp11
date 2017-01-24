@@ -1,3 +1,4 @@
 #!/bin/bash
-rm bin/*
-rm -r bin/.obj
+rm -r bin/
+#rm bin/*
+#rm -r bin/.obj

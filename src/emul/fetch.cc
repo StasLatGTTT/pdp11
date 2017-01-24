@@ -507,6 +507,14 @@ int fetch_conditional_branch(Interstate* state, Memory_unit* memory, \
     state->pc= memory->registers[7];
     state->statword= memory->statword;
     state->pc_delta= (int16_t)entry->offset;
+    return 0;
+}
 
+ int fetch_system(Interstate* state, Memory_unit* memory, \
+     Instruction_entry* entry)
+{
+    state->pc= memory->registers[7];
+    state->statword= memory->statword;
+    
     return 0;
 }
