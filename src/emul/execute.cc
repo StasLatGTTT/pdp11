@@ -68,7 +68,7 @@ int execute_mov(Interstate* state, Instruction_entry* entry)
     int32_t check_result=0;
 
     state->pc= state->pc + state->pc_delta +2 ;
-    state->src= state->src + state->src_delta+2;
+    state->src= state->src + state->src_delta;
     // if (state->src==7) state->pc= state->pc +2;
     state->dst= state->dst + state->dst_delta;
 
@@ -99,11 +99,12 @@ int execute_cmp(Interstate* state, Instruction_entry* entry)
 
     state->dst_val*= -1;
     state->pc= state->pc + state->pc_delta +2;
-    state->src= state->src + state->src_delta;
-    state->dst= state->dst + state->dst_delta;
+    // state->src= state->src + state->src_delta;
+    // state->dst= state->dst + state->dst_delta;
 
     result= state->src_val + state->dst_val;
     check_result= state->src_val + state->dst_val;
+    state->dst_val*= -1;
 
     if ((1<<16)& check_result)
     {
