@@ -57,31 +57,33 @@ void MainWindow::createUI(const QStringList &headers)
 
 void MainWindow::disasmTable(const QStringList &headers)
 {
-    //int len = (uint16_t)cpu->meta->prog_len;
-    int len = 20;
+    int len = (uint16_t)cpu->meta->prog_len;
+    //int len = 20;
     uint16_t instr;
     ui->tableWidget_2->setColumnCount(3); // Указываем число колонок
-    ui->tableWidget_2->setRowCount(len);
+    ui->tableWidget_2->setRowCount(len/2);
     ui->tableWidget_2->setHorizontalHeaderLabels(headers);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
     //ui->tableWidget_2->hideColumn(0);
     ui->tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_2->setColumnWidth(0, 30);
 
-    len = cpu->meta->prog_len;
-    uint8_t* prog = new uint8_t[len];
-    char *desc = new char[64];
-    cpu->memory->read_line(cpu->meta->prog_start, len, prog);
-    //instr = cpu->memory->swap_bytes(*((uint16_t*) prog));
-    instr = *((uint16_t*) (prog + 2 * 2));
-    desc = cpu->instruction->decode[instr].description;
-    QTableWidgetItem *itmV = new QTableWidgetItem(desc);
-    ui->tableWidget_2->setItem(0, 2 ,itmV);
+    for(int i=0; i<len/2; i++){
+        len = cpu->meta->prog_len;
+        uint8_t* prog = new uint8_t[len];
+        char *desc = new char[64];
+        cpu->memory->read_line(cpu->meta->prog_start, len, prog);
+        //instr = cpu->memory->swap_bytes(*((uint16_t*) prog));
+        instr = *((uint16_t*) (prog + i * 2));
+        desc = cpu->instruction->decode[instr].description;
+        QTableWidgetItem *itmV = new QTableWidgetItem(desc);
+        ui->tableWidget_2->setItem(i, 2 ,itmV);
 
-    char addr[6];
-    sprintf(addr, "%x", cpu->meta->prog_start);
-    QTableWidgetItem *itmVad = new QTableWidgetItem(addr);
-    ui->tableWidget_2->setItem(0, 1 ,itmVad);
+        char addr[6];
+        sprintf(addr, "%x", cpu->meta->prog_start + 2*i);
+        QTableWidgetItem *itmVad = new QTableWidgetItem(addr);
+        ui->tableWidget_2->setItem(i, 1 ,itmVad);
+    }
 
 
 }
@@ -111,5 +113,13 @@ void MainWindow::paintEvent(QPaintEvent *){
 void MainWindow::on_pushButton_clicked()
 {
     ui->label->setText("Registers");
+
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    cpu->step();
+    //this->update();
+    this->disasmTable(QStringList() << trUtf8("BP") << trUtf8("Address") << trUtf8("Disasm"));
 
 }
