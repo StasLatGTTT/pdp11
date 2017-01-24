@@ -15,6 +15,7 @@ MainWindow::MainWindow(Proc* cpu, QWidget *parent) :
     ui->setupUi(this);
     this->createUI(QStringList() << trUtf8("R0") << trUtf8("R0") << trUtf8("R1") << trUtf8("R2") << trUtf8("R3") << trUtf8("R4") << trUtf8("R5") << trUtf8("R6") << trUtf8("R7"));
     this->disasmTable(QStringList() << trUtf8("BP") << trUtf8("Address") << trUtf8("Disasm"));
+    this->setStatword(QStringList() << trUtf8("N") << trUtf8("N") << trUtf8("Z") << trUtf8("O") << trUtf8("C"));
 }
 
 MainWindow::~MainWindow()
@@ -85,6 +86,25 @@ void MainWindow::disasmTable(const QStringList &headers)
         ui->tableWidget_2->setItem(i, 1 ,itmVad);
     }
 
+
+}
+
+void MainWindow::setStatword(const QStringList &headers)
+{
+    ui->tableWidget_3->setColumnCount(5); // Указываем число колонок
+    ui->tableWidget_3->setRowCount(1);
+    ui->tableWidget_3->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_3->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_3->hideColumn(0);
+    //QTableWidgetItem *itmV = new QTableWidgetItem("0");
+    int8_t word[4];
+    for (int i = 0; i < 4; i++) {
+        word[i] = (cpu->memory->statword >> (3-i))&0x01;
+        char w[4];
+        sprintf(w, "%d", (int8_t)word[i]);
+        QTableWidgetItem *itmV = new QTableWidgetItem(w);
+        ui->tableWidget_3->setItem(0, i+1 ,itmV);
+    }
 
 }
 

@@ -35,6 +35,7 @@ private:
     void createUI(const QStringList &headers);
     // Дизассембла с чекбоксами
     void disasmTable(const QStringList &headers);
+    void setStatword(const QStringList &headers);
 
 protected:
     void paintEvent(QPaintEvent *);
