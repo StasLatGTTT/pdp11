@@ -50,7 +50,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       // val= memory->ram[adr];
       memory->read_word(adr+2, &val);
       state->src_delta= 2;
-      if (src == 7) state->src_delta +=2;
+    //   if (src == 7) state->src_delta +=2; //TOREDO
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
       //sp+=2
@@ -74,7 +74,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       state->src_delta= -2;
       //(memory->registers[src])-= 2;
       //or 1, as earlier discribed
-      adr= memory->registers[src] -2;
+      adr= memory->registers[src] +(state->src_delta);
       //there is (-2) because of reg[src] no changes
       // val= memory->ram[adr];
       // CHECK ERROR !!
@@ -85,7 +85,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       // Auto-decrement deferred
       state->src_delta= -2;
       // (memory->registers[src])-= 2;
-      adr= memory->registers[src] -2;
+      adr= memory->registers[src] +(state->src_delta);
       // adr= memory->ram[adr];
       memory->read_word(adr, &adr);
       // val= memory->ram[adr];
@@ -184,7 +184,7 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
       state->dst_delta= -2;
       //(memory->registers[dst])-= 2;
       //or 1, as earlier discribed
-      adr= memory->registers[dst] -2;
+      adr= memory->registers[dst] +(state->dst_delta);
       //there is (-2) because of reg[dst] no changes
       // val= memory->ram[adr];
       // CHECK ERROR !!
@@ -193,9 +193,9 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
     case 5:
       // @-(Rn)
       // Auto-decrement deferred
-      state->src_delta= -2;
+      state->dst_delta= -2;
       // (memory->registers[dst])-= 2;
-      adr= memory->registers[dst] -2;
+      adr= memory->registers[dst] +(state->dst_delta);
       // adr= memory->ram[adr];
       memory->read_word(adr, &adr);
       // val= memory->ram[adr];
@@ -242,6 +242,9 @@ int fetch_two_operand_1_word(Interstate* state, Memory_unit* memory, \
 
   state->dst_val= val;
   state->dst_adr= adr;
+
+  if(src == 7) state->src_delta+=state->pc_delta +2;
+  if(dst == 7) state->dst_delta+=state->pc_delta +2;
   // printf("dst_reg= %d, %d, %d\n", dst, adr, val);
 
   return 0;
@@ -293,8 +296,8 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       state->src_delta= 1;
-      if (src==6) state->src_delta= 2;
-      if (src==7) state->src_delta= 2;
+      if (src==6) state->src_delta= 2;//Special autoinc(look in byte)
+      if (src==7) state->src_delta= 2;//
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
       //sp+=2
@@ -317,11 +320,11 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       //-(Rn)
       // Auto-decrement
       state->src_delta= -1;
-      if (src==6) state->src_delta= -2;
-      if (src==7) state->src_delta= -2;
+      if (src==6) state->src_delta= -2;//Dec in R6-7 is to be (-2) nstead of (-1)
+      if (src==7) state->src_delta= -2;//
       //(memory->registers[src])-= 2;
       //or 1, as earlier discribed
-      adr= memory->registers[src] -2;
+      adr= memory->registers[src] +(state->src_delta);
       //there is (-2) because of reg[src] no changes
       // val= memory->ram[adr];
       // CHECK ERROR !!
@@ -332,7 +335,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       // Auto-decrement deferred
       state->src_delta= -2;
       // (memory->registers[src])-= 2;
-      adr= memory->registers[src] -2;
+      adr= memory->registers[src] +(state->src_delta);
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
       adr= (uint16_t)tmp_adr;
@@ -410,7 +413,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       // val= memory->ram[adr];
       memory->read_byte(adr, &val);
       state->dst_delta= 1;
-      if (dst==6) state->dst_delta= 2;
+      if (dst==6) state->dst_delta= 2;// Check description at mode1
       if (dst==7) state->dst_delta= 2;
       //(memory->registers[n_reg])+= 2;
       //or +=1 for byte instruction
@@ -438,7 +441,7 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
       if (dst==7) state->dst_delta= -2;
       //(memory->registers[dst])-= 2;
       //or 1, as earlier discribed
-      adr= memory->registers[dst] -2;
+      adr= memory->registers[dst] +(state->dst_delta);
       //there is (-2) because of reg[dst] no changes
       // val= memory->ram[adr];
       // CHECK ERROR !!
@@ -447,9 +450,9 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
     case 5:
       // @-(Rn)
       // Auto-decrement deferred
-      state->src_delta= -2;
+      state->dst_delta= -2;
       // (memory->registers[dst])-= 2;
-      adr= memory->registers[dst] -2;
+      adr= memory->registers[dst] +(state->dst_delta);
       // adr= memory->ram[adr];
       memory->read_byte(adr, &tmp_adr);
       adr= (uint16_t) tmp_adr;
@@ -499,6 +502,9 @@ int fetch_two_operand_1_byte(Interstate* state, Memory_unit* memory, \
 
   state->dst_val= val;
   state->dst_adr= adr;
+
+  if(src == 7) state->src_delta+=state->pc_delta +2;
+  if(dst == 7) state->dst_delta+=state->pc_delta +2;
   // printf("dst_reg= %d, %d, %d\n", dst, adr, val);
 
   return 0;

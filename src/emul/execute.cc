@@ -43,7 +43,7 @@ int execute_add(Interstate* state, Instruction_entry* entry)
   }
 
   state->dst_val= result;
-  state->statword= state->statword | flags;
+  state->statword= flags;
 
   // printf("state->src= %d\n", state->src);
   // printf("state->dst= %d\n", state->dst);
@@ -87,7 +87,7 @@ int execute_mov(Interstate* state, Instruction_entry* entry)
     }
 
     state->dst_val= result;
-    state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
@@ -151,7 +151,7 @@ int execute_bit(Interstate* state, Instruction_entry* entry)
     {
         flags+= 8;
     }
-    state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
@@ -177,7 +177,7 @@ int execute_bic(Interstate* state, Instruction_entry* entry)
     }
 
     state->dst_val= result;
-    state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
@@ -201,7 +201,7 @@ int execute_bis(Interstate* state, Instruction_entry* entry)
     }
 
     state->dst_val= result;
-    state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
@@ -247,7 +247,7 @@ int execute_addb(Interstate* state, Instruction_entry* entry)
 
   // hi= (uint8_t)((state->dst_val)>>8)
   state->dst_val= (uint16_t)result;
-  state->statword= state->statword | flags;
+  state->statword= flags;
 
   return 0;
 }
@@ -288,7 +288,7 @@ int execute_movb(Interstate* state, Instruction_entry* entry)
     }
 
     state->dst_val= (uint16_t)result;
-    state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
@@ -323,7 +323,7 @@ int execute_cmpb(Interstate* state, Instruction_entry* entry)
     {
         flags+= 8;
     }
-    state->statword= state->statword | flags;
+    state->statword= flags;
 
     return 0;
 }
